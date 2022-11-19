@@ -200,7 +200,9 @@ const StyledAppBar = styled(AppBar)`
     box-shadow: none;
     color: ${whiteColor};
     background: ${blackNavColor};
-    position: sticky !important;
+    position: fixed !important;
+    top: 0;
+    left:0;
   }
 `;
 
