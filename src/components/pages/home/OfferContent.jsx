@@ -3,6 +3,7 @@ import * as React from "react";
 import { Element } from "react-scroll";
 import styled from "styled-components";
 import {
+  bgWhiteColor,
   blackColor,
   GeneralText,
   OverlayAfter,
@@ -11,8 +12,10 @@ import {
 } from "../../../styles/commonStyles";
 import { navOffersID } from "../handlers/pageRoutes";
 import { offersList } from "../handlers/offer";
+import BagSvg from "../../../assets/logos/bag.svg";
 
 export const OfferContent = () => {
+
   return (
     <OfferElement name={navOffersID}>
       <OverlayBefore />
@@ -25,9 +28,17 @@ export const OfferContent = () => {
         </Box>
         <OfferBox id="offerContent">
           {offersList.map((offer) => (
-            <Tag>
-              <OfferImage src={offer?.image} alt={offer.alt} z-index={1} />
-              <GeneralText color={blackColor} as="h3">
+            <Tag
+              href={offer.link}
+              target="_blank"
+              rel="noopener"
+              key={offer.key}
+            >
+              <OfferProductDiv>
+                <GreenContent z-index />
+                <OfferImage src={offer?.image} alt={offer.alt} z-index={1} />
+              </OfferProductDiv>
+              <GeneralText color={blackColor} fontSize={"20px"} as="h3">
                 {offer?.title}
               </GeneralText>
               <GeneralText color={blackColor}>{offer?.subtitle}</GeneralText>
@@ -42,6 +53,7 @@ export const OfferContent = () => {
 
 const OfferElement = styled(Element)`
   min-height: 40vh !important;
+  background-color: ${bgWhiteColor};
 `;
 
 const OfferContainer = styled(Container)`
@@ -76,6 +88,7 @@ const OfferBox = styled(Box)`
 
 const Tag = styled.a`
   display: block;
+  text-decoration: none;
   @media (min-width: 729px) {
     width: 440px;
     margin: 0 1vw;
@@ -88,32 +101,50 @@ const Tag = styled.a`
 `;
 
 const OfferImage = styled.img`
-  @media (min-width: 729px) {
-    height: 240px;
-    width: 440px;
+  && {
+    @media (min-width: 729px) {
+      width: 440px;
+      height: 240px;
+      margin-left: -15%;
+    }
+    @media (min-width: 501px) and (max-width: 728px) {
+      width: 300px;
+      height: 180px;
+    }
+    @media (max-width: 500px) {
+      width: 60vw;
+      height: 20vh;
+    }
+    &:hover {
+      transition: 0.4s;
+      margin-left: -10%;
+      z-index: 6 !important;
+    }
   }
-  @media (max-width: 728px) {
-    width: 300px;
-    height: 180px;
+`;
+
+const GreenContent = styled.div`
+  && {
+    background: url(${BagSvg}) 50% 50% no-repeat;
+    @media (min-width: 729px) {
+      width: 66px;
+      height: 240px;
+    }
+    @media (max-width: 728px) {
+      width: 45px;
+      height: 180px;
+    }
+    @media (max-width: 500px) {
+      height: 20vh;
+    }
+    z-index: 3 !important;
+    position: relative;
+    background-color: #afbf00;
   }
-  &::after {
-    width: 80px;
-    height: 100%;
-    left: 0;
-    background: #afbf00;
-    content: "";
-    transition: 0.4s all;
-    display: block;
-    position: absolute;
-    z-index: 6;
-    box-sizing: border-box;
-  }
-  &::before {
-    width: 32px;
-    height: 40px;
-    top: 50%;
-    left: 22px;
-    margin-top: -16px;
-    z-index: 3;
+`;
+
+const OfferProductDiv = styled.div`
+  && {
+    display: block ruby;
   }
 `;

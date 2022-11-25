@@ -4,6 +4,7 @@ import overlayBefore from "../assets/images/home/home-background/before.png";
 import overlayAfter from "../assets/images/home/home-background/after.png";
 
 export const whiteColor = "#FFFFFF";
+export const bgWhiteColor = "#f6f6f6";
 export const blackNavColor = "rgba(14, 14, 17, 0.9)";
 export const greenColor = "#afbf00";
 export const blackColor = "#000";
@@ -22,23 +23,25 @@ export const HeaderText = styled(Typography)`
 `;
 
 export const GeneralText = styled(BodyText)`
-  color: ${(props) => (!!props.color ? props.color : whiteColor)};
-  font-size: 16px;
-  width: inherit;
-  text-align: ${(props) => (!!props.textAlign ? props.textAlign : "center")};
+  && {
+    color: ${(props) => (!!props.color ? props.color : whiteColor)};
+    font-size: ${(props) => (!!props.fontSize ? props.fontSize : "16px")};
+    width: inherit;
+    text-align: ${(props) => (!!props.textAlign ? props.textAlign : "center")};
+  }
 `;
 
 export const GeneralLink = styled(Link)`
   &&&& {
     color: ${(props) => (!!props.color ? props.color : greenColor)};
     text-decoration: none;
+    font-size: 16px !important;
     cursor: pointer;
     &:hover {
       text-decoration: underline;
     }
   }
 `;
-
 
 export const HiddenTypo = styled(BodyText)`
   opacity: 0;
@@ -92,4 +95,3 @@ export const OverlayAfter = styled.div`
 export const StyleDiv = styled.div`
   padding-top: 3%;
 `;
-

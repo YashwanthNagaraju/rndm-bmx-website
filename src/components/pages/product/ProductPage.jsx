@@ -1,10 +1,5 @@
-import * as React from 'react';
+import * as React from "react";
 
-
-export const ProductPage =()=> {
-  return (
-    <div>
-      Product Page
-    </div>
-  );
-}
+export const ProductPage = () => {
+  return <div>Product Page</div>;
+};

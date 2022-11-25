@@ -20,38 +20,32 @@ export const Footer = () => {
           <FooterHeader as="h2">Quick links</FooterHeader>
           <ul>
             {navLinks.map((page) => (
-              <>
-                <ListItem>
-                  <HomeLink
-                    offset={page.offset}
-                    key={page.id}
-                    to={page.id}
-                    spy={true}
-                    smooth={true}
-                    duration={500}
-                    tabIndex={1}
-                  >
-                    {page.name}
-                  </HomeLink>
-                </ListItem>
-              </>
+              <ListItem key={"footer" + page.id}>
+                <HomeLink
+                  offset={page.offset}
+                  to={page.id}
+                  spy={true}
+                  smooth={true}
+                  duration={500}
+                  tabIndex={1}
+                >
+                  {page.name}
+                </HomeLink>
+              </ListItem>
             ))}
 
             {footerLinks.map((page) => (
-              <>
-                <ListItem>
-                  <HomeLink
-                    key={page.id}
-                    to={page.id}
-                    spy={true}
-                    smooth={true}
-                    duration={500}
-                    tabIndex={1}
-                  >
-                    {page.name}
-                  </HomeLink>
-                </ListItem>
-              </>
+              <ListItem key={"footer" + page.id}>
+                <HomeLink
+                  to={page.id}
+                  spy={true}
+                  smooth={true}
+                  duration={500}
+                  tabIndex={1}
+                >
+                  {page.name}
+                </HomeLink>
+              </ListItem>
             ))}
           </ul>
         </FooterBox>

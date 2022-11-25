@@ -21,7 +21,10 @@ export const BlogContent = () => {
   const blogText =
     "How an adventure ride led into an idea for a RNDM - BMX girl's clothing range...";
   const linkText = "Continue reading";
-  // const blogLink = "";
+
+  const blogLink1 = "https://rndmbmx888.substack.com/p/coming-soon";
+  const blogLink2 = "https://rndmbmx8.substack.com/p/rndm-bmx-charity-segments";
+  const blogLink3 = "https://rndmbmxa8.substack.com/p/coming-soon";
 
   return (
     <Element name={navBlogID}>
@@ -43,7 +46,9 @@ export const BlogContent = () => {
                   </HeaderText>
                   <GeneralText textAlign="left">{blogText}</GeneralText>
                   <br />
-                  <GeneralLink>{linkText}</GeneralLink>
+                  <GeneralLink href={blogLink1} rel="noopener" target="_blank">
+                    {linkText}
+                  </GeneralLink>
                 </BlogInfo>
               </Item>
               <Item>
@@ -53,7 +58,9 @@ export const BlogContent = () => {
                   </HeaderText>
                   <GeneralText textAlign="left">{blogText}</GeneralText>
                   <br />
-                  <GeneralLink>{linkText}</GeneralLink>
+                  <GeneralLink href={blogLink2} rel="noopener" target="_blank">
+                    {linkText}
+                  </GeneralLink>
                 </BlogInfo>
                 <BlogImage src={blogItem2} alt="" />
               </Item>
@@ -69,14 +76,16 @@ export const BlogContent = () => {
                   </HeaderText>
                   <GeneralText textAlign="left">{blogText}</GeneralText>
                   <br />
-                  <GeneralLink>{linkText}</GeneralLink>
+                  <GeneralLink href={blogLink3} rel="noopener" target="_blank">
+                    {linkText}
+                  </GeneralLink>
                 </BlogInfo>
               </Item>
             </Grid>
           </ContentGrid>
         </BlogContentBox>
         <BlogContentBoxM>
-          <ContentGridM id="test2" container>
+          <ContentGridM container>
             <Grid item xs={12}>
               <ItemM>
                 <BlogImage src={blogItem1} alt="" />
@@ -88,7 +97,9 @@ export const BlogContent = () => {
                   </HeaderText>
                   <GeneralText textAlign="left">{blogText}</GeneralText>
                   <br />
-                  <GeneralLink>{linkText}</GeneralLink>
+                  <GeneralLink href={blogLink1} rel="noopener" target="_blank">
+                    {linkText}
+                  </GeneralLink>
                   <br />
                 </BlogInfo>
               </ItemM>
@@ -104,7 +115,9 @@ export const BlogContent = () => {
                   </HeaderText>
                   <GeneralText textAlign="left">{blogText}</GeneralText>
                   <br />
-                  <GeneralLink>{linkText}</GeneralLink>
+                  <GeneralLink href={blogLink2} rel="noopener" target="_blank">
+                    {linkText}
+                  </GeneralLink>
                   <br />
                 </BlogInfo>
               </ItemM>
@@ -120,7 +133,9 @@ export const BlogContent = () => {
                   </HeaderText>
                   <GeneralText textAlign="left">{blogText}</GeneralText>
                   <br />
-                  <GeneralLink>{linkText}</GeneralLink>
+                  <GeneralLink href={blogLink3} rel="noopener" target="_blank">
+                    {linkText}
+                  </GeneralLink>
                   <br />
                 </BlogInfo>
               </ItemM>
@@ -136,13 +151,20 @@ const BlogContainer = styled(Container)`
   && {
     background: url(${bgImage});
     background-size: cover !important;
-    background-attachment: fixed;
+    @media (min-width: 729px) {
+      background-attachment: fixed;
+    }
+    @media (max-width: 728px) {
+      width:100%;
+      padding: 20% 0%;
+      background-attachment: inherit;
+    }
     background-size: auto;
     width: 100vw;
     position: relative;
     margin: 0%;
     max-width: 100vw;
-    padding: 5% 0%;
+    padding: 6% 0%;
   }
 `;
 
@@ -171,7 +193,7 @@ const BlogImage = styled.img`
 
 const BlogInfo = styled.div`
   background: #121212;
-  padding: 0% 3%;
+  padding: 0% 1.5vw;
   text-align: left;
 `;
 
@@ -190,15 +212,15 @@ const ContentGrid = styled(Grid)`
   @media (min-width: 1800px) {
     width: 50% !important;
   }
-  @media (min-width: 1400px) and (max-width: 1800px){
+  @media (min-width: 1400px) and (max-width: 1800px) {
     width: 60% !important;
   }
-  @media (min-width: 1024px) and (max-width: 1400px){
+  @media (min-width: 1024px) and (max-width: 1400px) {
     width: 70% !important;
   }
   margin: auto;
 `;
 const ContentGridM = styled(Grid)`
-  width: 50% !important;
+  width: 70% !important;
   margin: auto;
 `;

@@ -4,22 +4,25 @@ import { Element } from "react-scroll";
 import styled from "styled-components";
 import { navProductID } from "../handlers/pageRoutes";
 import {
+  bgWhiteColor,
   blackColor,
   greenColor,
   OverlayAfter,
   OverlayBefore,
   Title,
-  whiteColor,
 } from "../../../styles/commonStyles";
 import { latestProducts } from "../handlers/latestProducts";
 
 export const ProductContent = () => {
   return (
     <ProductElement name={navProductID}>
-      <OverlayBefore />
+      <OverlayBefore isGrey={false} />
       <ProductContainer id="homeProduct">
         <Box style={{ textAlign: "center" }}>
-          <Title as="h2" isBlack={true}> Our Latest Products</Title>
+          <Title as="h2" isBlack={true}>
+            {" "}
+            Our Latest Products
+          </Title>
         </Box>
         <ProductBox id="latestProducts">
           <Stack
@@ -41,7 +44,7 @@ export const ProductContent = () => {
           </Stack>
         </ProductBox>
       </ProductContainer>
-      <OverlayAfter />
+      <OverlayAfter isGrey={false} />
     </ProductElement>
   );
 };
@@ -49,7 +52,7 @@ export const ProductContent = () => {
 const ProductElement = styled(Element)`
   &&& {
     max-width: 100vw;
-    background-color: ${whiteColor};
+    background-color: ${bgWhiteColor};
   }
 `;
 
@@ -58,6 +61,9 @@ const ProductContainer = styled(Container)`
 `;
 
 const ProductText = styled(Typography)`
+  @media (max-width: 728px) {
+    margin-bottom: 5px !important;
+  }
   color: ${blackColor};
 `;
 
@@ -81,5 +87,10 @@ const ProductImage = styled.img`
 
 const ProductLink = styled.a`
   cursor: pointer;
-  margin: 2vh 2vw 5vh 2vw!important;
+  @media (min-width: 729px) {
+    margin: 2vh 2vw 5vh 2vw !important;
+  }
+  @media (max-width: 728px) {
+    margin: 1vh 2vw 3vh 2vw !important;
+  }
 `;

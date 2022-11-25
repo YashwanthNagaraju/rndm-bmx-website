@@ -42,7 +42,7 @@ const OverlayBox = styled(Box)`
   position: absolute;
   top: 0;
   left: 0;
-  display:flex;
+  display: flex;
   justify-content: center;
   margin: auto;
   width: 100vw;
@@ -58,8 +58,6 @@ const VideoText = styled(HeaderText)`
     @media (min-width: 1024px) {
       max-width: 720px;
     }
-    @media (max-width: 728px) {
-      }
     align-items: center;
     justify-content: center;
     display: flex;

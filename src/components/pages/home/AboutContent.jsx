@@ -1,18 +1,19 @@
-import {
-  Box,
-  Card,
-  CardContent,
-  Container,
-  Typography,
-} from "@mui/material";
+import { Box, Card, CardContent, Container, Typography } from "@mui/material";
 import * as React from "react";
 import { Element } from "react-scroll";
 import styled from "styled-components";
 import { navAboutID } from "../handlers/pageRoutes";
 import bgImage from "../../../assets/images/home/about/about_image.png";
-import { GeneralLink, greenColor } from "../../../styles/commonStyles";
+import {
+  blackColor,
+  GeneralLink,
+  GeneralText,
+  greenColor,
+} from "../../../styles/commonStyles";
 
 export const AboutContent = () => {
+  const blogLink = "https://rndmbmx8.substack.com/p/coming-soon";
+
   return (
     <Element name={navAboutID}>
       <AboutContainer id="homeAbout">
@@ -22,24 +23,23 @@ export const AboutContent = () => {
               <AboutTitle as="h2" color="text.secondary" gutterBottom>
                 A little about us
               </AboutTitle>
-
-              <Typography>
+              <GeneralText color={blackColor} textAlign={"left"}>
                 Established in 2016, RNDM OR RaNDoM BMX was inspired by aiming
                 to be "Silly Unique" in a world full of Extreme.
-              </Typography>
+              </GeneralText>
               <br />
-              <Typography>
+              <GeneralText color={blackColor} textAlign={"left"}>
                 Fast Forward some years ahead, RNDM-BMX grew from just being a
                 BMX Brand about "Silly Unique" to a Brand where BMX can be for
                 ALL People Interested!
-              </Typography>
+              </GeneralText>
               <br />
-              <Typography>
+              <GeneralText color={blackColor} textAlign={"left"}>
                 Find out more about our{" "}
-                <GeneralLink>
+                <GeneralLink href={blogLink} rel="noopener" target="_blank">
                   Early Beginnings and Development as a BMX Brand
                 </GeneralLink>
-              </Typography>
+              </GeneralText>
             </Content>
           </AboutCard>
         </AboutBox>
@@ -52,7 +52,13 @@ const AboutContainer = styled(Container)`
   && {
     background: url(${bgImage});
     background-size: cover !important;
-    background-attachment: fixed;
+    @media (min-width: 729px) {
+      background-attachment: fixed;
+    }
+    @media (max-width: 728px) {
+      width:100%;
+      background-attachment: inherit;
+    }
     background-size: auto;
     width: 100vw;
     position: relative;
@@ -66,7 +72,12 @@ const AboutContainer = styled(Container)`
 const AboutBox = styled(Box)`
   width: 100vw;
   display: grid;
-  padding: 30vh 0vw;
+  @media (min-width: 729px) {
+    padding: 30vh 0vw;
+  }
+  @media (max-width: 728px) {
+    padding: 10vh 0vw;
+  }
   justify-items: center;
 `;
 
@@ -99,4 +110,3 @@ const Content = styled(CardContent)`
     margin: 0px 20px 10px 20px;
   }
 `;
-

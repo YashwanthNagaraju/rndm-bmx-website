@@ -4,6 +4,7 @@ import styled from "styled-components";
 import {
   blackColor,
   errorColor,
+  GeneralText,
   greenColor,
   HeaderText,
   OverlayBefore,
@@ -13,17 +14,10 @@ import {
 } from "../../../styles/commonStyles";
 import { navContactID } from "../handlers/pageRoutes";
 import bgImage from "../../../assets/images/home/contact/bg.jpg";
-import {
-  Alert,
-  Box,
-  Button,
-  Container,
-  Snackbar,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Alert, Box, Button, Container, Snackbar, Stack } from "@mui/material";
 import { apiKey } from "../handlers/emailKey";
 import emailjs from "@emailjs/browser";
+// import ReCAPTCHA from "react-google-recaptcha";
 
 export const errorText = "error";
 export const successText = "success";
@@ -66,15 +60,12 @@ export const ContactContent = () => {
     if (!message) {
       return handleMessage("Enter a message to submit.", errorText);
     }
-    // if(emailID)
-    // {
-    //   let regex = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');
-    //   if (!(regex.test(emailID)))
-    //   {
-    //     console.log("test")
-    //     return handleMessage("Wrong emailID format.", errorText);
-    //   }
-    // }
+    if (emailID) {
+      if (!emailID.match(/^[^@\s]+@[^@\s]+\.[^@\s]+$/)) {
+        console.log("test");
+        return handleMessage("Invalid email id.", errorText);
+      }
+    }
     try {
       var templateParams = {
         from_name: name,
@@ -115,17 +106,22 @@ export const ContactContent = () => {
     return () => clearTimeout(timer);
   }, [alert]);
 
+  const contactText="on the right"
+  const contactTextM="on the bottom"
+
   return (
     <ContactElement name={navContactID}>
       <OverlayBefore />
       <ContactContainer id="homeContact">
         <ContactStack id="contactStack" direction="row" spacing={2}>
           <ContactBox id="contactBox">
-            <ContactHeading color={blackColor} as="h2">Reach out to us</ContactHeading>
-            <ContactBody variant="body1">
+            <ContactHeading color={blackColor} as="h2">
+              Reach out to us
+            </ContactHeading>
+            <ContactText variant="body1" textAlign={"left"} color={blackColor}>
               For questions, queries and anything in between, just fill out the
-              form(on the right) and we will get back to you really soon.
-            </ContactBody>
+              form (on the right) and we will get back to you really soon.
+            </ContactText>
           </ContactBox>
           <ContactInfoBox component="form" id="contactInfoBox">
             <FormStack direction="row" spacing={4}>
@@ -133,6 +129,7 @@ export const ContactContent = () => {
               <InfoField
                 hasMargin={true}
                 maxLength={40}
+                isAdjacent={true}
                 id="nameField"
                 type="text"
                 placeholder="Name"
@@ -142,6 +139,7 @@ export const ContactContent = () => {
               <HiddenLabel htmlFor="emailIdField">Email ID: </HiddenLabel>
               <InfoField
                 id="emailIdField"
+                isAdjacent={true}
                 type="text"
                 maxLength={40}
                 placeholder="Email Id"
@@ -165,8 +163,8 @@ export const ContactContent = () => {
               type="text"
               maxLength={1000}
               style={{
-                minHeight: "10%",
-                paddingBottom: "10%",
+                minHeight: "20%",
+                paddingBottom: "25%",
               }}
               onChange={(e) => setMessage(e.target.value)}
             />
@@ -180,6 +178,7 @@ export const ContactContent = () => {
             >
               SEND IT!
             </MessageButton>
+            {/* <ReCAPTCHA sitekey={process.env.REACT_APP_SITE_KEY} /> */}
           </ContactInfoBox>
         </ContactStack>
         {msg !== "" && alert && (
@@ -216,6 +215,12 @@ const ContactElement = styled(Element)`
     background: url(${bgImage});
     background-size: cover !important;
     background-attachment: fixed;
+    @media (min-width: 729px) {
+      background-attachment: fixed;
+    }
+    @media (max-width: 728px) {
+      background-attachment: inherit;
+    }
     background-size: auto;
   }
 `;
@@ -280,11 +285,13 @@ const ContactInfoBox = styled(Box)`
   }
   @media (min-width: 900px) and (max-width:1400px) {
     padding-top:0%;
+    padding-left:5%;
     margin-left:0%;
     width: 60%;
   }
   @media (min-width: 1400px) {
     padding-top:0%;
+    padding-left:5%;
     margin-left:0%;
     width: 60%;
   }
@@ -310,14 +317,12 @@ const ContactHeading = styled(HeaderText)`
   }
 `;
 
-const ContactBody = styled(Typography)`
+const ContactText = styled(GeneralText)`
   && {
     @media (min-width: 1400px) {
       width: 30vw;
     }
-    text-align: left;
     width: inherit;
-    font-size: 20px;
   }
 `;
 
@@ -367,6 +372,9 @@ const TextField = styled.textarea`
     font-size: 20px;
     border: 0px;
     text-align: left;
+    @media (max-width: 728px) {
+      max-width: 80vw;
+    }
   }
 `;
 
@@ -381,9 +389,16 @@ const InfoField = styled.input`
     cursor: pointer;
     padding-bottom: 5%;
     margin-left: 0%;
-    min-width: 46.2%;
     margin-right: ${(props) => (props.hasMargin ? "3%" : "0%")};
     padding-right: 2%;
+    @media (min-width: 729px) {
+      min-width: 46.2%;
+    }
+    margin-right: ${(props) => (props.hasMargin ? "3%" : "0%")};
+    padding-right: 2%;
+    @media (max-width: 728px) {
+      max-width: ${(props) => (props.isAdjacent ? "37.2vw" : "80vw")};
+    }
   }
 `;
 

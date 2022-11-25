@@ -19,7 +19,7 @@ import { Slide, useMediaQuery } from "@mui/material";
 import {
   slideFwdTopAmt,
 } from "../../styles/animations";
-import { navLinks } from "../pages/handlers/pageRoutes";
+import { navHomeID, navLinks } from "../pages/handlers/pageRoutes";
 
 export const NavigationBar = () => {
   const { isOpen, setOpen } = useContext(ThemeContext);
@@ -109,6 +109,7 @@ export const NavigationBar = () => {
             <LogoLink
               offset={-200}
               spy={true}
+              to={navHomeID}
               smooth={true}
               duration={500}
               tabIndex={1}
@@ -122,6 +123,7 @@ export const NavigationBar = () => {
               <LogoLinkM
                 offset={-200}
                 spy={true}
+                to={navHomeID}
                 smooth={true}
                 duration={500}
                 tabIndex={1}
@@ -203,6 +205,7 @@ const StyledAppBar = styled(AppBar)`
     position: fixed !important;
     top: 0;
     left:0;
+    width: 100%;
   }
 `;
 
@@ -216,9 +219,6 @@ const NavContainer = styled(Container)`
     }
     @media (min-width: 1024px) {
       max-width: 95% !important;
-    }
-    @media (max-width: 728px) {
-      padding: 0 5vw;
     }
   }
 `;

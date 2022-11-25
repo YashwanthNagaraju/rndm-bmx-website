@@ -39,17 +39,16 @@ export const navBlogID = "blog";
 export const navContactID = "contact";
 
 export const navLinks = [
-  { name: "Home", id: navHomeID },
-  { name: "Products", id: navProductID },
-  { name: "About", id: navAboutID },
-  { name: "Offers", id: navOffersID },
-  { name: "Blog", id: navBlogID },
-  { name: "Contact Us", id: navContactID },
+  { name: "Home", id: navHomeID, offset: -200 },
+  { name: "Products", id: navProductID, offset: -200 },
+  { name: "About", id: navAboutID, offset: -50 },
+  { name: "Offers", id: navOffersID, offset: -100 },
+  { name: "Blog", id: navBlogID, offset: 0 },
+  { name: "Contact Us", id: navContactID, offset: -200 },
 ];
 export const footerLinks = [
   { name: "Refunds or Exchanges", id: "refund" },
   { name: "Privacy Policy", id: "privacy" },
-  
 ];
 
 export const homePageIds = [
