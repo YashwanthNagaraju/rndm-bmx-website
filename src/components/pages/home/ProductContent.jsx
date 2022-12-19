@@ -1,5 +1,5 @@
 import { Box, Container, Stack, Typography } from "@mui/material";
-import * as React from "react";
+import React from "react";
 import { Element } from "react-scroll";
 import styled from "styled-components";
 import { navProductID } from "../handlers/pageRoutes";
@@ -12,6 +12,7 @@ import {
   Title,
 } from "../../../styles/commonStyles";
 import { latestProducts } from "../handlers/latestProducts";
+import PencilBg from "../../../assets/images/home/home-background/pencil.png";
 
 export const ProductContent = () => {
   return (
@@ -19,10 +20,10 @@ export const ProductContent = () => {
       <OverlayBefore isGrey={false} />
       <ProductContainer id="homeProduct">
         <Box style={{ textAlign: "center" }}>
-          <Title as="h2" isBlack={true}>
+          <TitleWithImage as="h2" isBlack={true}>
             {" "}
-            Our Latest Products
-          </Title>
+            Our Upcoming Products
+          </TitleWithImage>
         </Box>
         <ProductBox id="latestProducts">
           <Stack
@@ -30,15 +31,19 @@ export const ProductContent = () => {
             spacing={{ xs: 1, sm: 2, md: 4 }}
           >
             {latestProducts.map((product) => (
-              <ProductLink key={product.alt}>
-                <ProductImage src={product.image} alt={product.alt} />
+              <ProductLink to={"/product"} key={product.key}>
+                <ProductImage
+                  src={product.image}
+                  alt={product.alt}
+                  key={product.alt}
+                />
                 <ProductText as="h3">{product.productName}</ProductText>
-                {product.offer === "" && <SubText>${+product.cost}</SubText>}
-                {!!product.offer && (
+                {/* {product.offer === "" && <SubText>${product.cost}</SubText>} */}
+                {/* {!!product.offer && (
                   <SubText>
                     <strike>${product.offer}</strike> ${product.cost}
                   </SubText>
-                )}
+                )} */}
               </ProductLink>
             ))}
           </Stack>
@@ -48,6 +53,12 @@ export const ProductContent = () => {
     </ProductElement>
   );
 };
+
+const TitleWithImage = styled(Title)`
+  background: url(${PencilBg}) no-repeat;
+
+  background-position: center;
+`;
 
 const ProductElement = styled(Element)`
   &&& {
@@ -64,10 +75,12 @@ const ProductText = styled(Typography)`
   @media (max-width: 728px) {
     margin-bottom: 5px !important;
   }
+  font-size: 24px;
   color: ${blackColor};
 `;
 
 const SubText = styled.strong`
+  font-size: 18px;
   color: ${greenColor}!important;
 `;
 
@@ -85,8 +98,7 @@ const ProductImage = styled.img`
   }
 `;
 
-const ProductLink = styled.a`
-  cursor: pointer;
+const ProductLink = styled.div`
   @media (min-width: 729px) {
     margin: 2vh 2vw 5vh 2vw !important;
   }
@@ -94,3 +106,4 @@ const ProductLink = styled.a`
     margin: 1vh 2vw 3vh 2vw !important;
   }
 `;
+

@@ -1,10 +1,9 @@
 // import React, {useEffect } from "react";
 // import { Footer } from "../../common/Footer";
 // import { NavigationBar } from "../../common/NavigationBar";
-// import { Product } from "./Product";
+// import { ShopContent } from "./ShopContent";
 
-// export const ProductPage = () => {
-
+// export const ShopPage = () => {
 //   useEffect(() => {
 //     console.log("test")
 //     window.scrollTo(0, 0)
@@ -12,7 +11,7 @@
 //   return (
 //     <div>
 //       <NavigationBar isHomePage={false}/>
-//       <Product/>
+//       <ShopContent/>
 //       <Footer />
 //     </div>
 //   );

@@ -16,24 +16,26 @@ import {
 import { ThemeContext } from "../../App";
 import Hamburger from "hamburger-react";
 import { Slide, useMediaQuery } from "@mui/material";
-import {
-  slideFwdTopAmt,
-} from "../../styles/animations";
-import { navHomeID, navLinks } from "../pages/handlers/pageRoutes";
+import { slideFwdTopAmt } from "../../styles/animations";
+import { navLinks } from "../pages/handlers/pageRoutes";
+import { HomeLogo, HomeLogoM } from "./HomeLogo";
+import { Link as RouterLink } from "react-router-dom";
 
-export const NavigationBar = () => {
+export const NavigationBar = ({ isHomePage }) => {
   const { isOpen, setOpen } = useContext(ThemeContext);
   const [scrollPosition, setScrollPosition] = useState();
   const matches = useMediaQuery("(max-width:900px)");
 
-  const elementArray = [
-    "homeVideo",
-    "homeProduct",
-    "homeAbout",
-    "homeOffer",
-    "homeBlog",
-    "footerContent",
-  ];
+  const elementArray = !isHomePage
+    ? []
+    : [
+        "homeVideo",
+        "homeProduct",
+        "homeAbout",
+        "homeOffer",
+        "homeBlog",
+        "footerContent",
+      ];
 
   function handleBlur(elementID, style) {
     const element = document.getElementById(elementID);
@@ -45,7 +47,7 @@ export const NavigationBar = () => {
       setOpen(!isOpen);
     }
   }
-  
+
   function watchScroll() {
     window.addEventListener("scroll", handleClose);
   }
@@ -106,31 +108,25 @@ export const NavigationBar = () => {
       <StyledAppBar id="navBar">
         <NavContainer maxWidth="xl">
           <NavToolbar disableGutters>
-            <LogoLink
-              offset={-200}
-              spy={true}
-              to={navHomeID}
-              smooth={true}
-              duration={500}
-              tabIndex={1}
-              id="logo"
-            >
-              <img width={130} height={84} src={RNDM} alt="Random bmx logo" />
-            </LogoLink>
-
+            {isHomePage && <HomeLogo />}
+            {!isHomePage && (
+              <NoStyleRouterLink style={{ paddingRight: "3%" }} to="/" id="logo">
+                <img width={130} height={84} src={RNDM} alt="Random bmx logo" />
+              </NoStyleRouterLink>
+            )}
             <NavBox sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-              <HiddenTypo>check</HiddenTypo>
-              <LogoLinkM
-                offset={-200}
-                spy={true}
-                to={navHomeID}
-                smooth={true}
-                duration={500}
-                tabIndex={1}
-                id="logoM"
-              >
-                <img width={120} height={84} src={RNDM} alt="Random bmx logo" />
-              </LogoLinkM>
+            <HiddenTypo>check</HiddenTypo>
+              {isHomePage && <HomeLogoM />}
+              {!isHomePage && (
+                <NoStyleRouterLinkM to="/" id="logoM">
+                  <img
+                    width={120}
+                    height={84}
+                    src={RNDM}
+                    alt="Random bmx logo"
+                  />
+                </NoStyleRouterLinkM>
+              )}
               <Hamburger
                 id="mobileHamburgerIcon"
                 style={{ display: "flex-end!important" }}
@@ -150,16 +146,23 @@ export const NavigationBar = () => {
             >
               {navLinks.map((page) => (
                 <NavText key={page.id} open={isOpen}>
-                  <HomeLink
-                    key={page.id}
-                    to={page.id}
-                    spy={true}
-                    smooth={true}
-                    duration={500}
-                    tabIndex={1}
-                  >
-                    {page.name.toUpperCase()}
-                  </HomeLink>
+                  {isHomePage && (
+                    <HomeLink
+                      key={page.id}
+                      to={page.id}
+                      spy={true}
+                      smooth={true}
+                      duration={500}
+                      tabIndex={1}
+                    >
+                      {page.name.toUpperCase()}
+                    </HomeLink>
+                  )}
+                  {!isHomePage && (
+                    <NoStyleRouterLink to={"/"}>
+                      {page.name}
+                    </NoStyleRouterLink>
+                  )}
                 </NavText>
               ))}
             </NavBox>
@@ -178,16 +181,25 @@ export const NavigationBar = () => {
           <MobileNav>
             {navLinks.map((page) => (
               <NavText key={page.id} open={isOpen}>
-                <HomeLink
-                  to={page.id}
-                  spy={true}
-                  onClick={handleClose}
-                  smooth={true}
-                  duration={500}
-                  tabIndex={1}
-                >
-                  {page.name.toUpperCase()}
-                </HomeLink>
+                <>
+                  {isHomePage && (
+                    <HomeLink
+                      to={page.id}
+                      spy={true}
+                      onClick={handleClose}
+                      smooth={true}
+                      duration={500}
+                      tabIndex={1}
+                    >
+                      {page.name.toUpperCase()}
+                    </HomeLink>
+                  )}
+                  {!isHomePage && (
+                    <NoStyleRouterLinkM to={page.pathname}>
+                      {page.name}
+                    </NoStyleRouterLinkM>
+                  )}
+                </>
               </NavText>
             ))}
           </MobileNav>
@@ -204,7 +216,7 @@ const StyledAppBar = styled(AppBar)`
     background: ${blackNavColor};
     position: fixed !important;
     top: 0;
-    left:0;
+    left: 0;
     width: 100%;
   }
 `;
@@ -227,30 +239,6 @@ const NavBox = styled(Box)`
   display: flex;
   align-items: center;
   justify-content: flex-end;
-`;
-
-const NoStyleLink = styled(Link)`
-  cursor: pointer;
-  display: grid !important;
-  padding: 1.5vh;
-  text-decoration: none;
-`;
-
-const LogoLink = styled(NoStyleLink)`
-   {
-    @media (max-width: 900px) {
-      display: none !important;
-    }
-  }
-`;
-
-const LogoLinkM = styled(NoStyleLink)`
-   {
-    @media (min-width: 901px) {
-      display: none !important;
-    }
-    margin: 0 auto;
-  }
 `;
 
 const SideNav = styled.aside`
@@ -300,7 +288,7 @@ const NavText = styled(GeneralText)`
       color: ${greenColor};
     }
     @media (min-width: 768px) {
-      font-size: 20px;
+      font-size: 24px;
     }
     font-size: 24px;
     cursor: pointer;
@@ -315,4 +303,24 @@ const HomeLink = styled(Link)`
 
 const NavToolbar = styled(Toolbar)`
   width: 100%;
+`;
+
+const NoStyleRouterLink = styled(RouterLink)`
+  text-decoration: none;
+  @media (max-width: 768px) {
+    display: none !important;
+  }
+  color: ${whiteColor};
+`;
+
+const NoStyleRouterLinkM = styled(RouterLink)`
+  text-decoration: none;
+  @media (min-width: 768px) {
+    display: none !important;
+  }
+  cursor: pointer;
+  display: grid !important;
+  padding: 1.5vh;
+  color: ${whiteColor};
+  margin: 0 auto;
 `;

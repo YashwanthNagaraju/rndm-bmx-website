@@ -1,11 +1,11 @@
 import { Box, Container, Grid, Paper } from "@mui/material";
-import * as React from "react";
+import React from "react";
 import { Element } from "react-scroll";
 import styled from "styled-components";
 import { navBlogID } from "../handlers/pageRoutes";
 import bgImage from "../../../assets/images/home/blog/blog-bg.jpg";
 import blogItem1 from "../../../assets/images/home/blog/blog-item-1.jpg";
-import blogItem2 from "../../../assets/images/home/blog/blog-item-2.jpg";
+import blogItem2 from "../../../assets/images/home/blog/blog3.jpg";
 import blogItem3 from "../../../assets/images/home/blog/blog-item-3.jpg";
 
 import {
@@ -13,13 +13,22 @@ import {
   GeneralLink,
   GeneralText,
   HeaderText,
+  OverlayAfter,
   Title,
 } from "../../../styles/commonStyles";
 
 export const BlogContent = () => {
-  const blogHeading = "The Birth of a New Mascot";
-  const blogText =
-    "How an adventure ride led into an idea for a RNDM - BMX girl's clothing range...";
+  const blogHeading = [
+    "The Birth of a New Mascot",
+    "RNDM-BMX Charity Segment's",
+    "RNDM-BMX Boys and girls range!",
+  ];
+
+  const blogText = [
+    "How an adventure ride led into an idea for a RNDM - BMX girl's clothing range...",
+    "It was April 2019, the Custom Tee’s had been designed and ordered, the old BMX...",
+    "Continuing on from the last article there must be mention that the latest mascot known...",
+  ];
   const linkText = "Continue reading";
 
   const blogLink1 = "https://rndmbmx888.substack.com/p/coming-soon";
@@ -30,21 +39,22 @@ export const BlogContent = () => {
     <Element name={navBlogID}>
       <BlogContainer id="homeBlog">
         <Box style={{ textAlign: "center" }}>
-          <Title as="h2" isBlack={false}>
+          <BlogTitle as="h2" isBlack={false}>
             {" "}
-            Blog
-          </Title>
+            Blogs
+          </BlogTitle>
+          <LineDiv />
         </Box>
         <BlogContentBox id="blogContent">
-          <ContentGrid id="test1" container>
+          <ContentGrid id="blogGrid" container>
             <Grid item xs={8}>
               <Item>
                 <BlogImage src={blogItem1} alt="" />
                 <BlogInfo>
                   <HeaderText textAlign="left" as="h3" color={brightGreenColor}>
-                    {blogHeading}
+                    {blogHeading[0]}
                   </HeaderText>
-                  <GeneralText textAlign="left">{blogText}</GeneralText>
+                  <GeneralText textAlign="left">{blogText[0]}</GeneralText>
                   <br />
                   <GeneralLink href={blogLink1} rel="noopener" target="_blank">
                     {linkText}
@@ -54,9 +64,9 @@ export const BlogContent = () => {
               <Item>
                 <BlogInfo>
                   <HeaderText textAlign="left" as="h3" color={brightGreenColor}>
-                    {blogHeading}
+                    {blogHeading[1]}
                   </HeaderText>
-                  <GeneralText textAlign="left">{blogText}</GeneralText>
+                  <GeneralText textAlign="left">{blogText[1]}</GeneralText>
                   <br />
                   <GeneralLink href={blogLink2} rel="noopener" target="_blank">
                     {linkText}
@@ -65,16 +75,16 @@ export const BlogContent = () => {
                 <BlogImage src={blogItem2} alt="" />
               </Item>
             </Grid>
-            <Grid item xs={4} style={{ padding: "0%" }} id="test">
+            <Grid item xs={4} style={{ padding: "0%" }}>
               <Item>
                 <BlogImage src={blogItem3} alt="" />
               </Item>
               <Item>
                 <BlogInfo style={{ paddingBottom: "4%" }}>
                   <HeaderText textAlign="left" as="h3" color={brightGreenColor}>
-                    {blogHeading}
+                    {blogHeading[2]}
                   </HeaderText>
-                  <GeneralText textAlign="left">{blogText}</GeneralText>
+                  <GeneralText textAlign="left">{blogText[2]}</GeneralText>
                   <br />
                   <GeneralLink href={blogLink3} rel="noopener" target="_blank">
                     {linkText}
@@ -84,8 +94,8 @@ export const BlogContent = () => {
             </Grid>
           </ContentGrid>
         </BlogContentBox>
-        <BlogContentBoxM>
-          <ContentGridM container>
+        <BlogContentBoxM id="blogContentM">
+          <ContentGridM id="blogGrid" container>
             <Grid item xs={12}>
               <ItemM>
                 <BlogImage src={blogItem1} alt="" />
@@ -93,9 +103,9 @@ export const BlogContent = () => {
               <ItemM>
                 <BlogInfo style={{ paddingBottom: "4%" }}>
                   <HeaderText textAlign="left" as="h3" color={brightGreenColor}>
-                    {blogHeading}
+                    {blogHeading[0]}
                   </HeaderText>
-                  <GeneralText textAlign="left">{blogText}</GeneralText>
+                  <GeneralText textAlign="left">{blogText[0]}</GeneralText>
                   <br />
                   <GeneralLink href={blogLink1} rel="noopener" target="_blank">
                     {linkText}
@@ -111,9 +121,9 @@ export const BlogContent = () => {
               <ItemM>
                 <BlogInfo style={{ paddingBottom: "4%" }}>
                   <HeaderText textAlign="left" as="h3" color={brightGreenColor}>
-                    {blogHeading}
+                    {blogHeading[1]}
                   </HeaderText>
-                  <GeneralText textAlign="left">{blogText}</GeneralText>
+                  <GeneralText textAlign="left">{blogText[1]}</GeneralText>
                   <br />
                   <GeneralLink href={blogLink2} rel="noopener" target="_blank">
                     {linkText}
@@ -129,9 +139,9 @@ export const BlogContent = () => {
               <ItemM>
                 <BlogInfo style={{ paddingBottom: "4%" }}>
                   <HeaderText textAlign="left" as="h3" color={brightGreenColor}>
-                    {blogHeading}
+                    {blogHeading[2]}
                   </HeaderText>
-                  <GeneralText textAlign="left">{blogText}</GeneralText>
+                  <GeneralText textAlign="left">{blogText[2]}</GeneralText>
                   <br />
                   <GeneralLink href={blogLink3} rel="noopener" target="_blank">
                     {linkText}
@@ -143,6 +153,7 @@ export const BlogContent = () => {
           </ContentGridM>
         </BlogContentBoxM>
       </BlogContainer>
+      <OverlayAfter />
     </Element>
   );
 };
@@ -155,7 +166,7 @@ const BlogContainer = styled(Container)`
       background-attachment: fixed;
     }
     @media (max-width: 728px) {
-      width:100%;
+      width: 100%;
       padding: 20% 0%;
       background-attachment: inherit;
     }
@@ -210,17 +221,32 @@ const ItemM = styled(Paper)(({ theme }) => ({
 
 const ContentGrid = styled(Grid)`
   @media (min-width: 1800px) {
-    width: 50% !important;
-  }
-  @media (min-width: 1400px) and (max-width: 1800px) {
     width: 60% !important;
   }
+  @media (min-width: 1400px) and (max-width: 1800px) {
+    width: 80% !important;
+  }
   @media (min-width: 1024px) and (max-width: 1400px) {
-    width: 70% !important;
+    width: 80% !important;
   }
   margin: auto;
 `;
+
 const ContentGridM = styled(Grid)`
-  width: 70% !important;
+  width: 85% !important;
   margin: auto;
+`;
+
+const LineDiv = styled.div`
+  content: "";
+  height: 7px;
+  display: block;
+  background: #fff;
+  margin: 12px auto;
+  width: 24px;
+`;
+
+const BlogTitle = styled(Title)`
+  margin-top: 15px;
+  margin-bottom: 0%;
 `;

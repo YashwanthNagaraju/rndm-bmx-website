@@ -1,6 +1,5 @@
 import { ProductPage } from "../product/ProductPage";
-import { BlogPage } from "../blog/BlogPage";
-import { ContactPage } from "../contact/ContactPage";
+import { ShopPage } from "../shop/ShopPage";
 import { HomePage } from "../home/HomePage";
 
 // setting the pages and the components for the routes
@@ -18,16 +17,10 @@ export const pageRoutes = [
     key: "product",
   },
   {
-    pathname: "/blog",
+    pathname: "/shop",
     exact: true,
-    component: BlogPage,
-    key: "blog",
-  },
-  {
-    pathname: "/contact",
-    exact: true,
-    component: ContactPage,
-    key: "contact",
+    component: ShopPage,
+    key: "product",
   },
 ];
 
@@ -39,16 +32,16 @@ export const navBlogID = "blog";
 export const navContactID = "contact";
 
 export const navLinks = [
-  { name: "Home", id: navHomeID, offset: -200 },
-  { name: "Products", id: navProductID, offset: -200 },
-  { name: "About", id: navAboutID, offset: -50 },
-  { name: "Offers", id: navOffersID, offset: -100 },
-  { name: "Blog", id: navBlogID, offset: 0 },
-  { name: "Contact Us", id: navContactID, offset: -200 },
+  { name: "Home", id: navHomeID, offset: -200, pathname: "/" },
+  { name: "Products", id: navProductID, offset: -200, pathname: "/" },
+  { name: "About", id: navAboutID, offset: -50, pathname: "/" },
+  { name: "Clothing", id: navOffersID, offset: -100, pathname: "/" },
+  { name: "Blogs", id: navBlogID, offset: 0, pathname: "/" },
+  { name: "Contact Us", id: navContactID, offset: -200, pathname: "/" },
 ];
 export const footerLinks = [
-  { name: "Refunds or Exchanges", id: "refund" },
-  { name: "Privacy Policy", id: "privacy" },
+  { name: "Returns and Cancellations", id: "refund", click:1},
+  { name: "Privacy Policy", id: "privacy",click:2 },
 ];
 
 export const homePageIds = [

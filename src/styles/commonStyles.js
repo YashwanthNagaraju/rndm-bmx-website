@@ -11,9 +11,15 @@ export const blackColor = "#000";
 export const errorColor = "#B00020";
 export const successColor = "rgb(56, 142, 60)";
 export const brightGreenColor = "#eaff00";
+export const myFont = "Nerko One";
+export const mobileSize = 40;
+export const laptopSize = 42;
 
 export const BodyText = styled(Typography)`
-  font-size: 16px;
+  && {
+    font-size: 20px;
+    font-family: ${myFont};
+  }
 `;
 
 export const HeaderText = styled(Typography)`
@@ -25,7 +31,7 @@ export const HeaderText = styled(Typography)`
 export const GeneralText = styled(BodyText)`
   && {
     color: ${(props) => (!!props.color ? props.color : whiteColor)};
-    font-size: ${(props) => (!!props.fontSize ? props.fontSize : "16px")};
+    font-size: ${(props) => (!!props.fontSize ? props.fontSize : "20px")};
     width: inherit;
     text-align: ${(props) => (!!props.textAlign ? props.textAlign : "center")};
   }
@@ -35,7 +41,7 @@ export const GeneralLink = styled(Link)`
   &&&& {
     color: ${(props) => (!!props.color ? props.color : greenColor)};
     text-decoration: none;
-    font-size: 16px !important;
+    font-size: 20px !important;
     cursor: pointer;
     &:hover {
       text-decoration: underline;
@@ -54,8 +60,11 @@ export const HomeContainer = styled(Container)`
 
 export const Title = styled(HeaderText)`
   text-transform: uppercase;
-  font-size: 32px;
+  font-size: 46px;
   letter-spacing: 2px;
+  && {
+    font-family: ${myFont};
+  }
   font-weight: 700;
   color: ${(props) => (props.isBlack ? blackColor : whiteColor)};
 `;
@@ -94,4 +103,8 @@ export const OverlayAfter = styled.div`
 
 export const StyleDiv = styled.div`
   padding-top: 3%;
+`;
+
+export const CommonContainer = styled(Container)`
+  min-height: 80vh;
 `;

@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { Footer } from "../../common/Footer";
 import { NavigationBar } from "../../common/NavigationBar";
 import { AboutContent } from "./AboutContent";
@@ -11,7 +11,7 @@ import { ProductContent } from "./ProductContent";
 export const HomePage = () => {
   return (
     <div>
-      <NavigationBar />
+      <NavigationBar isHomePage={true}/>
       <HomeVideoContent />
       <ProductContent />
       <AboutContent />

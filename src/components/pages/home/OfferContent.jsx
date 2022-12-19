@@ -1,5 +1,5 @@
 import { Box, Container } from "@mui/material";
-import * as React from "react";
+import React from "react";
 import { Element } from "react-scroll";
 import styled from "styled-components";
 import {
@@ -13,32 +13,38 @@ import {
 import { navOffersID } from "../handlers/pageRoutes";
 import { offersList } from "../handlers/offer";
 import BagSvg from "../../../assets/logos/bag.svg";
+import PencilBg from "../../../assets/images/home/home-background/pencil.png";
+// import { Link } from "react-router-dom";
 
 export const OfferContent = () => {
-
   return (
     <OfferElement name={navOffersID}>
       <OverlayBefore />
       <OfferContainer id="homeOffer">
         <Box style={{ textAlign: "center" }}>
-          <Title as="h2" isBlack={true}>
+          <TitleWithImage as="h2" isBlack={true}>
             {" "}
-            Check our Offers
-          </Title>
+            Check our Clothing Line
+          </TitleWithImage>
         </Box>
         <OfferBox id="offerContent">
           {offersList.map((offer) => (
             <Tag
+              key={offer.key}
               href={offer.link}
               target="_blank"
               rel="noopener"
-              key={offer.key}
             >
               <OfferProductDiv>
                 <GreenContent z-index />
-                <OfferImage src={offer?.image} alt={offer.alt} z-index={1} />
+                <OfferImage
+                  src={offer?.image}
+                  alt={offer.alt}
+                  z-index={1}
+                  key={offer.key}
+                />
               </OfferProductDiv>
-              <GeneralText color={blackColor} fontSize={"20px"} as="h3">
+              <GeneralText color={blackColor} fontSize={"24px"} as="h3">
                 {offer?.title}
               </GeneralText>
               <GeneralText color={blackColor}>{offer?.subtitle}</GeneralText>
@@ -50,6 +56,11 @@ export const OfferContent = () => {
     </OfferElement>
   );
 };
+
+const TitleWithImage = styled(Title)`
+  background: url(${PencilBg}) no-repeat;
+  background-position: center;
+`;
 
 const OfferElement = styled(Element)`
   min-height: 40vh !important;
@@ -100,12 +111,26 @@ const Tag = styled.a`
   }
 `;
 
+// const LinkA = styled(Link)`
+//   display: block;
+//   text-decoration: none;
+//   @media (min-width: 729px) {
+//     width: 440px;
+//     margin: 0 1vw;
+//     padding: 2%;
+//   }
+//   @media (max-width: 728px) {
+//     width: 300px;
+//     margin: 2vh 0%;
+//   }
+// `;
+
 const OfferImage = styled.img`
   && {
     @media (min-width: 729px) {
       width: 440px;
       height: 240px;
-      margin-left: -15%;
+      margin-left: -30%;
     }
     @media (min-width: 501px) and (max-width: 728px) {
       width: 300px;
@@ -145,6 +170,6 @@ const GreenContent = styled.div`
 
 const OfferProductDiv = styled.div`
   && {
-    display: block ruby;
+    display: -webkit-box;
   }
 `;

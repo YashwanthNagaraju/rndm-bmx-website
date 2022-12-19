@@ -10,6 +10,7 @@ import {
   OverlayBefore,
   StyleDiv,
   successColor,
+  Title,
   whiteColor,
 } from "../../../styles/commonStyles";
 import { navContactID } from "../handlers/pageRoutes";
@@ -62,7 +63,6 @@ export const ContactContent = () => {
     }
     if (emailID) {
       if (!emailID.match(/^[^@\s]+@[^@\s]+\.[^@\s]+$/)) {
-        console.log("test");
         return handleMessage("Invalid email id.", errorText);
       }
     }
@@ -71,6 +71,7 @@ export const ContactContent = () => {
         from_name: name,
         from_email: emailID,
         message: message,
+        subject: subject,
       };
       emailjs
         .send(
@@ -106,12 +107,19 @@ export const ContactContent = () => {
     return () => clearTimeout(timer);
   }, [alert]);
 
-  const contactText="on the right"
-  const contactTextM="on the bottom"
-
+  // const contactText = "on the right";
+  // const contactTextM = "on the bottom";
+  const isMobile = window.matchMedia('only screen and (max-width: 900px)').matches;
+  const contactText = isMobile? "bottom":"right"
   return (
     <ContactElement name={navContactID}>
       <OverlayBefore />
+      <Box style={{ textAlign: "center" }}>
+        <ContactTitle as="h2" isBlack={true}>
+          {" "}
+          Contact Us
+        </ContactTitle>
+      </Box>
       <ContactContainer id="homeContact">
         <ContactStack id="contactStack" direction="row" spacing={2}>
           <ContactBox id="contactBox">
@@ -120,12 +128,12 @@ export const ContactContent = () => {
             </ContactHeading>
             <ContactText variant="body1" textAlign={"left"} color={blackColor}>
               For questions, queries and anything in between, just fill out the
-              form (on the right) and we will get back to you really soon.
+              form (on the {contactText}) and we will get back to you really soon.
             </ContactText>
           </ContactBox>
           <ContactInfoBox component="form" id="contactInfoBox">
             <FormStack direction="row" spacing={4}>
-              <HiddenLabel htmlFor="nameField">Name: </HiddenLabel>
+              <HiddenLabel htmlFor="nameField">Name:* </HiddenLabel>
               <InfoField
                 hasMargin={true}
                 maxLength={40}
@@ -239,7 +247,7 @@ const ContactContainer = styled(Container)`
     }
     @media (min-width: 1200px) {
       max-width: 80% !important;
-      padding: 15vh 0% 15vh 0%;
+      padding: 10vh 0% 15vh 0%;
       display: inline-flex;
     }
   }
@@ -297,6 +305,9 @@ const ContactInfoBox = styled(Box)`
   }
 }
 `;
+const ContactTitle = styled(Title)`
+  padding-top: 4%;
+`;
 
 const ContactHeading = styled(HeaderText)`
   && {
@@ -342,7 +353,6 @@ const MessageButton = styled(Button)`
     padding: 2% 0%;
     background: ${greenColor};
     margin: auto;
-    border-radius: 50px;
     -webkit-transition: background-color 1s linear;
     -ms-transition: background-color 1s linear;
     transition: background-color 1s linear;
@@ -368,7 +378,6 @@ const TextField = styled.textarea`
     -ms-transition: background-color 1.2s linear;
     transition: background-color 1.2s linear;
     cursor: pointer;
-
     font-size: 20px;
     border: 0px;
     text-align: left;
