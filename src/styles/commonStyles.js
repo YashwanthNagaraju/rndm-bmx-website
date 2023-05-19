@@ -1,7 +1,7 @@
 import { Container, Link, Typography } from "@mui/material";
 import styled from "styled-components";
-import overlayBefore from "../assets/images/home/home-background/before.png";
-import overlayAfter from "../assets/images/home/home-background/after.png";
+import overlayBefore from "../assets/images/home/before.png";
+import overlayAfter from "../assets/images/home/after.png";
 
 export const whiteColor = "#FFFFFF";
 export const bgWhiteColor = "#f6f6f6";
@@ -32,7 +32,6 @@ export const GeneralText = styled(BodyText)`
   && {
     color: ${(props) => (!!props.color ? props.color : whiteColor)};
     font-size: ${(props) => (!!props.fontSize ? props.fontSize : "20px")};
-    width: inherit;
     text-align: ${(props) => (!!props.textAlign ? props.textAlign : "center")};
   }
 `;

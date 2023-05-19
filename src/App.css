@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  font-family: "Nerko One", "Kalam", cursive;
 }
 
 .App-logo {
@@ -35,4 +36,9 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+@font-face {
+  font-family: "Nerko One";
+  src: url(../src/assets/fonts/NerkoOne-Regular.ttf) format("truetype");
 }

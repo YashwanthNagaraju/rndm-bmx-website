@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -10,12 +10,12 @@ import {
   blackNavColor,
   GeneralText,
   greenColor,
-  HiddenTypo,
+  myFont,
   whiteColor,
 } from "../../styles/commonStyles";
 import { ThemeContext } from "../../App";
 import Hamburger from "hamburger-react";
-import { Slide, useMediaQuery } from "@mui/material";
+import { Grid, Slide, useMediaQuery } from "@mui/material";
 import { slideFwdTopAmt } from "../../styles/animations";
 import { navLinks } from "../pages/handlers/pageRoutes";
 import { HomeLogo, HomeLogoM } from "./HomeLogo";
@@ -24,29 +24,28 @@ import { Link as RouterLink } from "react-router-dom";
 export const NavigationBar = ({ isHomePage }) => {
   const { isOpen, setOpen } = useContext(ThemeContext);
   const [scrollPosition, setScrollPosition] = useState();
-  const matches = useMediaQuery("(max-width:900px)");
+  const isMobile = !useMediaQuery("(min-width:900px)");
 
-  const elementArray = !isHomePage
-    ? []
-    : [
-        "homeVideo",
-        "homeProduct",
-        "homeAbout",
-        "homeOffer",
-        "homeBlog",
-        "footerContent",
-      ];
+  const elementArray = [
+    "home-video-section",
+    "home-product-section",
+    "home-about-section",
+    "home-offer-section",
+    "home-blog-section",
+    "home-contact-section",
+    "footer-content",
+  ];
 
-  function handleBlur(elementID, style) {
+  const handleBlur = useCallback((elementID, style) => {
     const element = document.getElementById(elementID);
     element.style.filter = style;
-  }
+  }, []);
 
-  function handleClose() {
+  const handleClose = useCallback(() => {
     if (isOpen) {
       setOpen(!isOpen);
     }
-  }
+  }, [isOpen, setOpen]);
 
   function watchScroll() {
     window.addEventListener("scroll", handleClose);
@@ -59,12 +58,12 @@ export const NavigationBar = ({ isHomePage }) => {
 
   // blur other elements when mobile nav bar is active
   useEffect(() => {
-    if (matches && isOpen) {
+    if (isMobile && isOpen) {
       elementArray.map((ele) => handleBlur(ele, "blur(4px)"));
     } else {
       elementArray.map((ele) => handleBlur(ele, "none"));
     }
-  }, [matches, isOpen]);
+  }, [isMobile, isOpen, handleBlur]);
 
   useEffect(() => {
     if (isOpen) {
@@ -73,7 +72,7 @@ export const NavigationBar = ({ isHomePage }) => {
         window.removeEventListener("scroll", handleClose);
       };
     }
-  }, [isOpen]);
+  }, [isOpen, handleClose]);
 
   // to handle click away and escape
   useEffect(() => {
@@ -87,56 +86,75 @@ export const NavigationBar = ({ isHomePage }) => {
     return () => {
       window.removeEventListener("keydown", handleClose);
     };
-  }, [isOpen]);
+  }, [isOpen, handleClose]);
 
   useEffect(() => {
-    window.onscroll = function () {
+    function handleScroll() {
       const currentScrollPos = window.pageYOffset;
       if (scrollPosition > currentScrollPos) {
-        document.getElementById("navBar").style.top = "0";
-        document.getElementById("navBar").style.transition = "0.5s";
+        document.getElementById("navigation-bar").style.top = "0";
+        document.getElementById("navigation-bar").style.transition = "0.5s";
       } else {
-        document.getElementById("navBar").style.top = "-15%";
-        document.getElementById("navBar").style.transition = "0.5s";
+        document.getElementById("navigation-bar").style.top = "-25%";
+        document.getElementById("navigation-bar").style.transition = "0.5s";
       }
       setScrollPosition(currentScrollPos);
+    }
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
     };
-  });
+  }, [scrollPosition]);
 
   return (
-    <>
-      <StyledAppBar id="navBar">
+    <React.Fragment>
+      <StyledAppBar id="navigation-bar" position="fixed">
         <NavContainer maxWidth="xl">
-          <NavToolbar disableGutters>
-            {isHomePage && <HomeLogo />}
+          <Toolbar disableGutters>
+            {!isMobile && isHomePage && <HomeLogo />}
             {!isHomePage && (
-              <NoStyleRouterLink style={{ paddingRight: "3%" }} to="/" id="logo">
-                <img width={130} height={84} src={RNDM} alt="Random bmx logo" />
+              <NoStyleRouterLink
+                style={{ paddingRight: "3%" }}
+                to="/"
+                id="logo"
+                href="/"
+              >
+                <LogoImage width={130} height={90} src={RNDM} alt="RNDM-BMX" />
               </NoStyleRouterLink>
             )}
-            <NavBox sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-            <HiddenTypo>check</HiddenTypo>
-              {isHomePage && <HomeLogoM />}
-              {!isHomePage && (
-                <NoStyleRouterLinkM to="/" id="logoM">
-                  <img
-                    width={120}
-                    height={84}
-                    src={RNDM}
-                    alt="Random bmx logo"
-                  />
-                </NoStyleRouterLinkM>
-              )}
-              <Hamburger
-                id="mobileHamburgerIcon"
-                style={{ display: "flex-end!important" }}
-                toggled={isOpen}
-                toggle={setOpen}
-                duration={0.8}
-                color={greenColor}
-                size={26}
-              />
-            </NavBox>
+            <NavGrid
+              container
+              sx={{
+                flexGrow: 1,
+                display: { xs: "flex!important", md: "none!important" },
+              }}
+            >
+              <Grid item xs={3}></Grid>
+              <LogoGridM item xs={6}>
+                {isHomePage && <HomeLogoM />}
+                {!isHomePage && (
+                  <NoStyleRouterLinkM to="/" id="mobile-logo">
+                    <LogoImage
+                      width={120}
+                      height={84}
+                      src={RNDM}
+                      alt="RNDM-BMX"
+                    />
+                  </NoStyleRouterLinkM>
+                )}
+              </LogoGridM>
+              <MenuGrid item xs={3}>
+                <Hamburger
+                  id="mobile-hamburger-icon"
+                  style={{ display: "flex-end!important" }}
+                  toggled={isOpen}
+                  toggle={setOpen}
+                  duration={0.8}
+                  color={greenColor}
+                  size={26}
+                />
+              </MenuGrid>
+            </NavGrid>
 
             <NavBox
               sx={{
@@ -153,25 +171,24 @@ export const NavigationBar = ({ isHomePage }) => {
                       spy={true}
                       smooth={true}
                       duration={500}
-                      tabIndex={1}
+                      tabIndex={0}
+                      href="/"
                     >
                       {page.name.toUpperCase()}
                     </HomeLink>
                   )}
                   {!isHomePage && (
-                    <NoStyleRouterLink to={"/"}>
-                      {page.name}
-                    </NoStyleRouterLink>
+                    <NoStyleRouterLink to={"/"}>{page.name}</NoStyleRouterLink>
                   )}
                 </NavText>
               ))}
             </NavBox>
-          </NavToolbar>
+          </Toolbar>
         </NavContainer>
       </StyledAppBar>
       <Slide
         direction="left"
-        id="mobileNavBar"
+        id="mobile-nav-bar"
         in={isOpen}
         mountOnEnter
         unmountOnExit
@@ -181,7 +198,7 @@ export const NavigationBar = ({ isHomePage }) => {
           <MobileNav>
             {navLinks.map((page) => (
               <NavText key={page.id} open={isOpen}>
-                <>
+                <React.Fragment>
                   {isHomePage && (
                     <HomeLink
                       to={page.id}
@@ -189,7 +206,8 @@ export const NavigationBar = ({ isHomePage }) => {
                       onClick={handleClose}
                       smooth={true}
                       duration={500}
-                      tabIndex={1}
+                      tabIndex={0}
+                      href="/"
                     >
                       {page.name.toUpperCase()}
                     </HomeLink>
@@ -199,13 +217,13 @@ export const NavigationBar = ({ isHomePage }) => {
                       {page.name}
                     </NoStyleRouterLinkM>
                   )}
-                </>
+                </React.Fragment>
               </NavText>
             ))}
           </MobileNav>
         </SideNav>
       </Slide>
-    </>
+    </React.Fragment>
   );
 };
 
@@ -214,30 +232,38 @@ const StyledAppBar = styled(AppBar)`
     box-shadow: none;
     color: ${whiteColor};
     background: ${blackNavColor};
-    position: fixed !important;
-    top: 0;
-    left: 0;
-    width: 100%;
+    backdrop-filter: blur(2px);
   }
 `;
 
 const NavContainer = styled(Container)`
   && {
+    padding: 0vh 2.5vw !important;
     -webkit-animation: ${slideFwdTopAmt};
     animation: ${slideFwdTopAmt};
-
-    @media (max-width: 1024px) {
-      max-width: 90% !important;
-    }
-    @media (min-width: 1024px) {
-      max-width: 95% !important;
-    }
   }
 `;
 
 const NavBox = styled(Box)`
   display: flex;
   align-items: center;
+  justify-content: flex-end;
+`;
+
+const NavGrid = styled(Grid)`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+`;
+
+const LogoGridM = styled(Grid)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const MenuGrid = styled(Grid)`
+  display: flex;
   justify-content: flex-end;
 `;
 
@@ -261,7 +287,7 @@ const SideNav = styled.aside`
     background-color: ${blackNavColor};
     overflow-x: hidden;
     box-shadow: -10px 0px 30px -15px ${blackNavColor};
-    @media (min-width: 901px) {
+    @media (min-width: 900px) {
       display: none;
     }
   }
@@ -273,7 +299,7 @@ const MobileNav = styled.nav`
   justify-content: space-between;
   -moz-box-align: center;
   align-items: center;
-  width: 100%;
+  min-width: 100%;
   flex-direction: column;
   text-align: center;
   gap: 8vh;
@@ -287,10 +313,13 @@ const NavText = styled(GeneralText)`
     &:hover {
       color: ${greenColor};
     }
-    @media (min-width: 768px) {
+    font-size: 28px;
+    @media (min-width: 900px) {
       font-size: 24px;
     }
-    font-size: 24px;
+    @media (min-width: 1200px) {
+      font-size: 26px;
+    }
     cursor: pointer;
   }
 `;
@@ -298,29 +327,35 @@ const NavText = styled(GeneralText)`
 const HomeLink = styled(Link)`
   && {
     cursor: pointer;
+    text-decoration: none;
+    color: ${whiteColor};
   }
-`;
-
-const NavToolbar = styled(Toolbar)`
-  width: 100%;
-`;
-
-const NoStyleRouterLink = styled(RouterLink)`
-  text-decoration: none;
-  @media (max-width: 768px) {
-    display: none !important;
-  }
-  color: ${whiteColor};
 `;
 
 const NoStyleRouterLinkM = styled(RouterLink)`
   text-decoration: none;
+  display: flex;
+  justify-content: center;
   @media (min-width: 768px) {
     display: none !important;
   }
+  color: ${whiteColor};
+`;
+
+const NoStyleRouterLink = styled(RouterLink)`
+  display: none;
+  text-decoration: none;
+  @media (min-width: 768px) {
+    display: flex !important;
+    justify-content: center;
+  }
   cursor: pointer;
-  display: grid !important;
   padding: 1.5vh;
   color: ${whiteColor};
   margin: 0 auto;
+`;
+
+const LogoImage = styled.img`
+  font-family: ${myFont};
+  font-size: 30px;
 `;

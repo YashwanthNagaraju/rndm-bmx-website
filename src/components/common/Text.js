@@ -1,5 +1,6 @@
-import { Typography } from "@mui/material";
+import React from "react";
 import styled from "styled-components";
+import { Typography } from "@mui/material";
 
 export const returnHeading = "Returns and Cancellations";
 
@@ -8,34 +9,35 @@ export const returnText =
 
 export const Return = () => {
   return (
-    <>
+    <React.Fragment>
       <Heading as="h4">
-        <b>Returns and Cancellations</b>
+        <strong>Returns and Cancellations</strong>
       </Heading>
       <BodyText>
         Because rndm-bmx.com (“RNDM-BMX”) uses SPRING (previously Teespring) to
         sell it’s Clothing and Accessories online, please visit the provided
-        link for more Details in regards to Returns and Cancellations:-
+        link for more Details in regards to Returns and Cancellations{" "}
         <a
           href="https://answers.spri.ng/article/returns-and-cancellations/"
           target="_blank"
+          rel="noreferrer"
         >
-          here{" "}
+          here
         </a>
         <br /> <br /> Or feel free to message us using the Contact form on the
         rndm-bmx.com website. <br />
         <br />
         Thank you!"
       </BodyText>
-    </>
+    </React.Fragment>
   );
 };
 
 export const Privacy = () => {
   return (
-    <>
+    <React.Fragment>
       <Heading as="h4">
-        <b>rndm-bmx.com (“RNDM-BMX”) Privacy Policy</b>
+        <strong>rndm-bmx.com (“RNDM-BMX”) Privacy Policy</strong>
       </Heading>
       <BodyText>
         rndm-bmx.com (“RNDM-BMX”) is committed to ensuring the privacy and
@@ -50,7 +52,7 @@ export const Privacy = () => {
         <br />
         <br />
         <br />
-        <b>The information we collect</b>
+        <strong>The information we collect</strong>
         <br />
         When you lodge an enquiry with or submit an order to rndm-bmx.com
         (“RNDM-BMX”) via our websites, or by any other method, we may collect
@@ -93,7 +95,7 @@ export const Privacy = () => {
         <br />
         <br />
         <br />
-        <b>rndm-bmx.com (“RNDM-BMX”) web site</b>
+        <strong>rndm-bmx.com (“RNDM-BMX”) web site</strong>
         <br />
         Like most web sites, there is certain information we automatically track
         when you use rndm-bmx.com (“RNDM-BMX”) website, including the URL that
@@ -111,7 +113,7 @@ export const Privacy = () => {
         <br />
         <br />
         <br />
-        <b>How we use the information</b>
+        <strong>How we use the information</strong>
         <br />
         The information you provide will be collected and saved by us and used
         to assess your requirements and to enable rndm-bmx.com (“RNDM-BMX”) to
@@ -153,9 +155,9 @@ export const Privacy = () => {
         <br />
         <br />
         <br />
-        <b>
+        <strong>
           Opting out of promotional information from rndm-bmx.com (“RNDM-BMX”)
-        </b>
+        </strong>
         <br />
         rndm-bmx.com (“RNDM-BMX”) works hard to provide our customers and future
         customers with the best possible products and information at all times.
@@ -167,7 +169,7 @@ export const Privacy = () => {
         <br />
         <br />
         <br />
-        <b>Revisions to policy</b>
+        <strong>Revisions to policy</strong>
         <br />
         This policy is reviewed regularly and may be revised from time to time,
         as we alter the way we use your information, or new features are added
@@ -176,7 +178,7 @@ export const Privacy = () => {
         <br />
         <br />
         <br />
-        <b>How to contact us</b>
+        <strong>How to contact us</strong>
         <br />
         If you have any concerns or queries about rndm-bmx.com (“RNDM-BMX”)
         Privacy Policy or would like more information, please contact us using
@@ -189,7 +191,7 @@ export const Privacy = () => {
         <br />
         Policy last revised 4-12-2022.
       </BodyText>
-    </>
+    </React.Fragment>
   );
 };
 

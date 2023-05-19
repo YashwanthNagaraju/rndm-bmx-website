@@ -1,21 +1,21 @@
-import boys from "../../../assets/images/home/offers/for-boys.jpg";
-import girls from "../../../assets/images/home/offers/for-girls.jpg";
-// import adventure_shop from "../../../assets/images/home/offers/adventure-shop.jpg";
+import boys_img from "../../../assets/images/home/offer_boys.png";
+import girls_img from "../../../assets/images/home/offer_girls.png";
+// import adventure_shop from "../../../assets/images/home/offers/adventure-shop.png";
 
 export const offersList = [
   {
-    image: boys,
+    image: boys_img,
     title: "Clothing for the Boys",
     subtitle: "Clothing and Accessories for the BMX Boys",
-    alt: "Man with a bicycle",
+    alt: "A boy on a bicycle wearing a random BMX shirt",
     key: "offerBoys",
     link: "https://rndm-bmx-boyz-merch-2.creator-spring.com",
   },
   {
-    image: girls,
+    image: girls_img,
     title: "Clothing for the Girls",
     subtitle: "Clothing and Accessories for the BMX Girls",
-    alt: "Girl with a bicycle",
+    alt: "A girl on a bicycle wearing a random BMX helmet",
     key: "offerGirls",
     link: "https://rndm-bmx-girlz-merch.creator-spring.com/",
   },

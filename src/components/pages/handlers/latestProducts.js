@@ -1,6 +1,6 @@
-import pin from "../../../assets/images/home/latest-products/pin.png";
-import Clamp from "../../../assets/images/home/latest-products/Clamp.png";
-import Post from "../../../assets/images/home/latest-products/Post.png";
+import pin from "../../../assets/images/home/pin.png";
+import Clamp from "../../../assets/images/home/clamp.png";
+import Post from "../../../assets/images/home/post.png";
 
 export const latestProducts = [
   {
@@ -8,23 +8,23 @@ export const latestProducts = [
     productName: "Seat Clamp",
     cost: 300,
     offer: "",
-    alt: "Seat Clamp",
-    key: "clamp"
+    alt: "A Seat Clamp for a BMX bike",
+    key: "clamp",
   },
   {
     image: pin,
     productName: "Brake Pins",
     cost: 140,
     offer: "",
-    alt: "Brake Pins",
-    key:"pin",
+    alt: "Customized Brake Pins for a BMX bike",
+    key: "pin",
   },
   {
     image: Post,
     productName: "Seat post",
     cost: 130,
     offer: 125.0,
-    alt: "Seat post",
-    key: "post"
+    alt: "Seat post for a BMX bike",
+    key: "post",
   },
 ];

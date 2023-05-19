@@ -24,12 +24,12 @@ export const pageRoutes = [
   },
 ];
 
-export const navHomeID = "home";
-export const navProductID = "products";
-export const navAboutID = "about";
-export const navOffersID = "offers";
-export const navBlogID = "blog";
-export const navContactID = "contact";
+export const navHomeID = "home-section";
+export const navProductID = "products-section";
+export const navAboutID = "about-section";
+export const navOffersID = "offers-section";
+export const navBlogID = "blog-section";
+export const navContactID = "contact-section";
 
 export const navLinks = [
   { name: "Home", id: navHomeID, offset: -200, pathname: "/" },
@@ -40,16 +40,16 @@ export const navLinks = [
   { name: "Contact Us", id: navContactID, offset: -200, pathname: "/" },
 ];
 export const footerLinks = [
-  { name: "Returns and Cancellations", id: "refund", click:1},
-  { name: "Privacy Policy", id: "privacy",click:2 },
+  { name: "Returns and Cancellations", id: "refund", click: 1 },
+  { name: "Privacy Policy", id: "privacy", click: 2 },
 ];
 
-export const homePageIds = [
-  "homeVideo",
-  "homeProduct",
-  "homeAbout",
-  "homeOffer",
-  "homeBlog",
-  "homeContact",
-  "footerContent",
-];
+// export const homePageIds = [
+//   "home-video-section",
+//   "home-product-section",
+//   "home-about-section",
+//   "home-offer-section",
+//   "home-blog-section",
+//   "homeContact",
+//   "footerContent",
+// ];

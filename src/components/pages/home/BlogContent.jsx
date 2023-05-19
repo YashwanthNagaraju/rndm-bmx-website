@@ -1,240 +1,249 @@
-import { Box, Container, Grid, Paper } from "@mui/material";
 import React from "react";
+import { Box, Container, Grid } from "@mui/material";
 import { Element } from "react-scroll";
 import styled from "styled-components";
 import { navBlogID } from "../handlers/pageRoutes";
-import bgImage from "../../../assets/images/home/blog/blog-bg.jpg";
-import blogItem1 from "../../../assets/images/home/blog/blog-item-1.jpg";
-import blogItem2 from "../../../assets/images/home/blog/blog3.jpg";
-import blogItem3 from "../../../assets/images/home/blog/blog-item-3.jpg";
-
+import blogItem1 from "../../../assets/images/home/blog_item_1.png";
+import blogItem2 from "../../../assets/images/home/blog_item_2.png";
+import blogItem3 from "../../../assets/images/home/blog_item_3.png";
+import bgdImage from "../../../assets/images/home/blog_background.png";
 import {
-  brightGreenColor,
   GeneralLink,
   GeneralText,
   HeaderText,
-  OverlayAfter,
   Title,
+  brightGreenColor,
 } from "../../../styles/commonStyles";
+import overlayAfter from "../../../assets/images/home/after.png";
+
+const blogHeading = [
+  "Branding Identity",
+  "Clothing for Our Brand Promoters",
+  "Haunted Hills BMX Style",
+];
+
+const blogText = [
+  "When doing a Model shoot one Sunny Afternoon, I noticed the different people...",
+  "G’Day All. RNDM-BMX is Purchasing some Clothing for our Brand Promoters so they...",
+  "Ok….. So it may be more or less of a new Mountain Bike Park to be exact, but...",
+];
+
+const linkText = "Continue reading";
+
+const blogLink1 = "https://rndmbmx888.substack.com/p/branding-identity";
+const blogLink2 =
+  "https://rndmbmx888.substack.com/p/clothing-for-our-brand-promoters";
+const blogLink3 = "https://rndmbmx8.substack.com/p/haunted-hills-bmx-style";
+
+const alt_text_1 = "One of the Model Shoots Taken Place";
+const alt_text_2 = "A BMX bike placed on a haunted hills gravestone";
+const alt_text_3 = "Boys New Tees";
 
 export const BlogContent = () => {
-  const blogHeading = [
-    "The Birth of a New Mascot",
-    "RNDM-BMX Charity Segment's",
-    "RNDM-BMX Boys and girls range!",
-  ];
-
-  const blogText = [
-    "How an adventure ride led into an idea for a RNDM - BMX girl's clothing range...",
-    "It was April 2019, the Custom Tee’s had been designed and ordered, the old BMX...",
-    "Continuing on from the last article there must be mention that the latest mascot known...",
-  ];
-  const linkText = "Continue reading";
-
-  const blogLink1 = "https://rndmbmx888.substack.com/p/coming-soon";
-  const blogLink2 = "https://rndmbmx8.substack.com/p/rndm-bmx-charity-segments";
-  const blogLink3 = "https://rndmbmxa8.substack.com/p/coming-soon";
-
   return (
-    <Element name={navBlogID}>
-      <BlogContainer id="homeBlog">
-        <Box style={{ textAlign: "center" }}>
+    <BlogElement name={navBlogID} id="home-blog-section">
+      <BlogContainer>
+        <Box style={{ textAlign: "center", paddingBottom: "5%" }}>
           <BlogTitle as="h2" isBlack={false}>
-            {" "}
             Blogs
           </BlogTitle>
           <LineDiv />
         </Box>
-        <BlogContentBox id="blogContent">
-          <ContentGrid id="blogGrid" container>
-            <Grid item xs={8}>
-              <Item>
-                <BlogImage src={blogItem1} alt="" />
-                <BlogInfo>
-                  <HeaderText textAlign="left" as="h3" color={brightGreenColor}>
-                    {blogHeading[0]}
-                  </HeaderText>
-                  <GeneralText textAlign="left">{blogText[0]}</GeneralText>
-                  <br />
-                  <GeneralLink href={blogLink1} rel="noopener" target="_blank">
-                    {linkText}
-                  </GeneralLink>
-                </BlogInfo>
-              </Item>
-              <Item>
-                <BlogInfo>
-                  <HeaderText textAlign="left" as="h3" color={brightGreenColor}>
-                    {blogHeading[1]}
-                  </HeaderText>
-                  <GeneralText textAlign="left">{blogText[1]}</GeneralText>
-                  <br />
-                  <GeneralLink href={blogLink2} rel="noopener" target="_blank">
-                    {linkText}
-                  </GeneralLink>
-                </BlogInfo>
-                <BlogImage src={blogItem2} alt="" />
-              </Item>
-            </Grid>
-            <Grid item xs={4} style={{ padding: "0%" }}>
-              <Item>
-                <BlogImage src={blogItem3} alt="" />
-              </Item>
-              <Item>
-                <BlogInfo style={{ paddingBottom: "4%" }}>
-                  <HeaderText textAlign="left" as="h3" color={brightGreenColor}>
-                    {blogHeading[2]}
-                  </HeaderText>
-                  <GeneralText textAlign="left">{blogText[2]}</GeneralText>
-                  <br />
-                  <GeneralLink href={blogLink3} rel="noopener" target="_blank">
-                    {linkText}
-                  </GeneralLink>
-                </BlogInfo>
-              </Item>
-            </Grid>
+        <Grid
+          container
+          direction={{ md: "row" }}
+          display={{ xs: "none", md: "flex" }}
+        >
+          <Grid item md={5.5} display={"flex"}>
+            <BlogImage src={blogItem1} alt={alt_text_1} />
+          </Grid>
+          <ContentGrid item md={2.5}>
+            <BlogHeader textAlign="left" as="h3" color={brightGreenColor}>
+              {blogHeading[0]}
+            </BlogHeader>
+            <GeneralText textAlign="left">{blogText[0]}</GeneralText>
+            <br />
+            <GeneralLink href={blogLink1} rel="noopener" target="_blank">
+              {linkText}
+            </GeneralLink>
           </ContentGrid>
-        </BlogContentBox>
-        <BlogContentBoxM id="blogContentM">
-          <ContentGridM id="blogGrid" container>
-            <Grid item xs={12}>
-              <ItemM>
-                <BlogImage src={blogItem1} alt="" />
-              </ItemM>
-              <ItemM>
-                <BlogInfo style={{ paddingBottom: "4%" }}>
-                  <HeaderText textAlign="left" as="h3" color={brightGreenColor}>
-                    {blogHeading[0]}
-                  </HeaderText>
-                  <GeneralText textAlign="left">{blogText[0]}</GeneralText>
-                  <br />
-                  <GeneralLink href={blogLink1} rel="noopener" target="_blank">
-                    {linkText}
-                  </GeneralLink>
-                  <br />
-                </BlogInfo>
-              </ItemM>
-            </Grid>
-            <Grid item xs={12}>
-              <ItemM>
-                <BlogImage src={blogItem2} alt="" />
-              </ItemM>
-              <ItemM>
-                <BlogInfo style={{ paddingBottom: "4%" }}>
-                  <HeaderText textAlign="left" as="h3" color={brightGreenColor}>
-                    {blogHeading[1]}
-                  </HeaderText>
-                  <GeneralText textAlign="left">{blogText[1]}</GeneralText>
-                  <br />
-                  <GeneralLink href={blogLink2} rel="noopener" target="_blank">
-                    {linkText}
-                  </GeneralLink>
-                  <br />
-                </BlogInfo>
-              </ItemM>
-            </Grid>
-            <Grid item xs={12}>
-              <ItemM>
-                <BlogImage src={blogItem3} alt="" />
-              </ItemM>
-              <ItemM>
-                <BlogInfo style={{ paddingBottom: "4%" }}>
-                  <HeaderText textAlign="left" as="h3" color={brightGreenColor}>
-                    {blogHeading[2]}
-                  </HeaderText>
-                  <GeneralText textAlign="left">{blogText[2]}</GeneralText>
-                  <br />
-                  <GeneralLink href={blogLink3} rel="noopener" target="_blank">
-                    {linkText}
-                  </GeneralLink>
-                  <br />
-                </BlogInfo>
-              </ItemM>
-            </Grid>
-          </ContentGridM>
-        </BlogContentBoxM>
+          <Grid item md={4} display={"flex"}>
+            <BlogImage src={blogItem2} alt={alt_text_2} />
+          </Grid>
+        </Grid>
+
+        <Grid
+          container
+          direction={{ xs: "column", md: "row" }}
+          display={{ xs: "none", md: "flex" }}
+        >
+          <ContentGrid item md={2.5}>
+            <BlogHeader textAlign="left" as="h3" color={brightGreenColor}>
+              {blogHeading[1]}
+            </BlogHeader>
+            <GeneralText textAlign="left">{blogText[1]}</GeneralText>
+            <br />
+            <GeneralLink href={blogLink2} rel="noopener" target="_blank">
+              {linkText}
+            </GeneralLink>
+          </ContentGrid>
+          <Grid item display={"flex"} md={5.5}>
+            <BlogImage src={blogItem3} alt={alt_text_3} />
+          </Grid>
+          <ContentGrid item md={4}>
+            <BlogHeader textAlign="left" as="h3" color={brightGreenColor}>
+              {blogHeading[2]}
+            </BlogHeader>
+            <GeneralText textAlign="left">{blogText[2]}</GeneralText>
+            <br />
+            <GeneralLink href={blogLink3} rel="noopener" target="_blank">
+              {linkText}
+            </GeneralLink>
+          </ContentGrid>
+        </Grid>
+        <Grid
+          id="blog-1-mobile"
+          container
+          spacing={0}
+          direction={{ xs: "column" }}
+          display={{ xs: "block", md: "none" }}
+        >
+          <Grid item>
+            <BlogImage src={blogItem1} alt={alt_text_1} />
+          </Grid>
+          <ContentGrid item>
+            <BlogHeader textAlign="left" as="h3" color={brightGreenColor}>
+              {blogHeading[0]}
+            </BlogHeader>
+            <GeneralText textAlign="left">{blogText[0]}</GeneralText>
+            <br />
+            <GeneralLink href={blogLink1} rel="noopener" target="_blank">
+              {linkText}
+            </GeneralLink>
+          </ContentGrid>
+        </Grid>
+        <Grid
+          id="blog-2-mobile"
+          container
+          direction={{ xs: "column" }}
+          display={{ xs: "block", md: "none" }}
+          spacing={0}
+        >
+          <Grid item>
+            <BlogImage src={blogItem2} alt={alt_text_2} />
+          </Grid>
+          <ContentGrid item>
+            <BlogHeader textAlign="left" as="h3" color={brightGreenColor}>
+              {blogHeading[1]}
+            </BlogHeader>
+            <GeneralText textAlign="left">{blogText[1]}</GeneralText>
+            <br />
+            <GeneralLink href={blogLink2} rel="noopener" target="_blank">
+              {linkText}
+            </GeneralLink>
+          </ContentGrid>
+        </Grid>
+        <Grid
+          id="blog-3-mobile"
+          container
+          direction={{ xs: "column" }}
+          display={{ xs: "block", md: "none" }}
+          spacing={0}
+        >
+          <Grid item>
+            <BlogImage src={blogItem3} alt={alt_text_3} />
+          </Grid>
+          <ContentGrid item>
+            <BlogHeader textAlign="left" as="h3" color={brightGreenColor}>
+              {blogHeading[2]}
+            </BlogHeader>
+            <GeneralText textAlign="left">{blogText[2]}</GeneralText>
+            <br />
+            <GeneralLink href={blogLink3} rel="noopener" target="_blank">
+              {linkText}
+            </GeneralLink>
+          </ContentGrid>
+        </Grid>
       </BlogContainer>
-      <OverlayAfter />
-    </Element>
+    </BlogElement>
   );
 };
 
+const BlogElement = styled(Element)`
+  min-width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: url(${bgdImage});
+  background-size: cover !important;
+  background-attachment: inherit;
+  padding: constant(safe-area-inset-top) constant(safe-area-inset-right)
+    constant(safe-area-inset-bottom) constant(safe-area-inset-left);
+  padding: env(safe-area-inset-top) env(safe-area-inset-right)
+    env(safe-area-inset-bottom) env(safe-area-inset-left);
+  @media (min-width: 728px) {
+    background-attachment: fixed;
+  }
+  ::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 100px;
+    background: url(${overlayAfter}) 50% 50% no-repeat;
+    background-size: cover;
+    position: inherit;
+    transform: translate(0, 100%);
+    bottom: 0;
+    left: 0;
+    z-index: 3;
+    margin-top: -3%;
+  }
+`;
+
 const BlogContainer = styled(Container)`
   && {
-    background: url(${bgImage});
-    background-size: cover !important;
-    @media (min-width: 729px) {
-      background-attachment: fixed;
+    padding: 20% 6% 20% 6%;
+    @media (min-width: 600px) {
+      padding: 12% 10% 10% 10%;
     }
-    @media (max-width: 728px) {
-      width: 100%;
-      padding: 20% 0%;
-      background-attachment: inherit;
+    @media (min-width: 900px) {
+      padding: 10% 2% 10% 2%;
     }
-    background-size: auto;
-    width: 100vw;
-    position: relative;
-    margin: 0%;
-    max-width: 100vw;
-    padding: 6% 0%;
+    @media (min-width: 1200px) {
+      padding: 8% 3% 8% 3%;
+    }
+    @media (min-width: 1536px) {
+      padding: 6% 3% 6% 3%;
+    }
   }
 `;
 
-const BlogContentBox = styled(Box)`
-  padding-top: 2%;
-  padding-bottom: 10%;
-
-  @media (max-width: 1024px) {
-    display: none;
-  }
+const BlogTitle = styled(Title)`
+  margin-top: 15px;
+  margin-bottom: 0%;
+  text-shadow: -2px 2px 1px #000;
 `;
 
-const BlogContentBoxM = styled(Box)`
-  padding-top: 2%;
-  padding-bottom: 20%;
-  @media (min-width: 1024px) {
-    display: none;
+const BlogHeader = styled(HeaderText)`
+  & {
+    margin-top: 0%;
   }
 `;
 
 const BlogImage = styled.img`
   object-fit: fill;
   width: 100%;
-  height: auto;
+  height: 100%;
 `;
-
-const BlogInfo = styled.div`
-  background: #121212;
-  padding: 0% 1.5vw;
-  text-align: left;
-`;
-
-const Item = styled(Paper)(({ theme }) => ({
-  textAlign: "center",
-  display: "flex",
-  minHeight: "55%",
-}));
-
-const ItemM = styled(Paper)(({ theme }) => ({
-  textAlign: "center",
-  display: "flex",
-}));
 
 const ContentGrid = styled(Grid)`
-  @media (min-width: 1800px) {
-    width: 60% !important;
+  background: #121212;
+  padding: 3% 2%;
+  @media (min-width: 900px) {
+    padding: 2% 2%;
   }
-  @media (min-width: 1400px) and (max-width: 1800px) {
-    width: 80% !important;
-  }
-  @media (min-width: 1024px) and (max-width: 1400px) {
-    width: 80% !important;
-  }
-  margin: auto;
-`;
-
-const ContentGridM = styled(Grid)`
-  width: 85% !important;
-  margin: auto;
+  text-align: left;
 `;
 
 const LineDiv = styled.div`
@@ -244,9 +253,4 @@ const LineDiv = styled.div`
   background: #fff;
   margin: 12px auto;
   width: 24px;
-`;
-
-const BlogTitle = styled(Title)`
-  margin-top: 15px;
-  margin-bottom: 0%;
 `;

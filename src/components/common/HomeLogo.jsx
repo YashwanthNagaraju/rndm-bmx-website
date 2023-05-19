@@ -12,10 +12,11 @@ export const HomeLogo = () => {
       to={navHomeID}
       smooth={true}
       duration={500}
-      tabIndex={1}
+      tabIndex={0}
       id="logo"
+      href="/"
     >
-      <img width={130} height={84} src={RNDM} alt="Random bmx logo" />
+      <img width={157} height={100} src={RNDM} alt="RNDM-BMX" />
     </LogoLink>
   );
 };
@@ -28,34 +29,33 @@ export const HomeLogoM = () => {
       to={navHomeID}
       smooth={true}
       duration={500}
-      tabIndex={1}
-      id="logoM"
+      tabIndex={0}
+      id="logo-mobile"
+      href="/"
     >
-      <img width={120} height={84} src={RNDM} alt="Random bmx logo" />
+      <img width={125} height={80} src={RNDM} alt="RNDM-BMX" />
     </LogoLinkM>
   );
 };
 
 const NoStyleLink = styled(Link)`
   cursor: pointer;
-  display: grid !important;
+  display: flex !important;
   padding: 1.5vh;
   text-decoration: none;
 `;
 
 const LogoLink = styled(NoStyleLink)`
-   {
-    @media (max-width: 900px) {
-      display: none !important;
-    }
+  display: none;
+  @media (min-width: 900px) {
+    display: flex !important;
   }
 `;
 
 const LogoLinkM = styled(NoStyleLink)`
-   {
-    @media (min-width: 901px) {
-      display: none !important;
-    }
-    margin: 0 auto;
+  display: flex;
+  @media (min-width: 900px) {
+    display: none !important;
   }
+  margin: 0 auto;
 `;

@@ -6,28 +6,25 @@ import {
   bgWhiteColor,
   blackColor,
   GeneralText,
-  OverlayAfter,
-  OverlayBefore,
   Title,
 } from "../../../styles/commonStyles";
 import { navOffersID } from "../handlers/pageRoutes";
 import { offersList } from "../handlers/offer";
 import BagSvg from "../../../assets/logos/bag.svg";
-import PencilBg from "../../../assets/images/home/home-background/pencil.png";
-// import { Link } from "react-router-dom";
+import PencilBg from "../../../assets/images/home/pencil_mark_bgd.png";
+import overlayBefore from "../../../assets/images/home/before.png";
+import overlayAfter from "../../../assets/images/home/after.png";
 
 export const OfferContent = () => {
   return (
-    <OfferElement name={navOffersID}>
-      <OverlayBefore />
-      <OfferContainer id="homeOffer">
+    <OfferElement name={navOffersID} id="home-offer-section">
+      <OfferContainer>
         <Box style={{ textAlign: "center" }}>
           <TitleWithImage as="h2" isBlack={true}>
-            {" "}
             Check our Clothing Line
           </TitleWithImage>
         </Box>
-        <OfferBox id="offerContent">
+        <OfferBox flexDirection={{ xs: "column", md: "row" }}>
           {offersList.map((offer) => (
             <Tag
               key={offer.key}
@@ -36,7 +33,7 @@ export const OfferContent = () => {
               rel="noopener"
             >
               <OfferProductDiv>
-                <GreenContent z-index />
+                <GreenContent />
                 <OfferImage
                   src={offer?.image}
                   alt={offer.alt}
@@ -52,34 +49,58 @@ export const OfferContent = () => {
           ))}
         </OfferBox>
       </OfferContainer>
-      <OverlayAfter />
     </OfferElement>
   );
 };
 
-const TitleWithImage = styled(Title)`
-  background: url(${PencilBg}) no-repeat;
-  background-position: center;
-`;
-
 const OfferElement = styled(Element)`
-  min-height: 40vh !important;
-  background-color: ${bgWhiteColor};
+  && {
+    min-height: 40vh;
+    background-color: ${bgWhiteColor};
+    min-width: 100vw;
+    padding: constant(safe-area-inset-top) constant(safe-area-inset-right)
+      constant(safe-area-inset-bottom) constant(safe-area-inset-left);
+    padding: env(safe-area-inset-top) env(safe-area-inset-right)
+      env(safe-area-inset-bottom) env(safe-area-inset-left);
+    ::before {
+      margin-bottom: -8%;
+      @media (min-width: 728px) {
+        margin-bottom: -5%;
+      }
+      content: "";
+      display: block;
+      width: 100%;
+      min-height: 100px;
+      position: inherit;
+      transform: translate(0, -99px);
+      top: 0;
+      left: 0;
+      z-index: 3;
+      background: url(${overlayBefore});
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+    }
+    ::after {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 60px;
+      @media (min-width: 728px) {
+        height: 100px;
+      }
+      background: url(${overlayAfter}) 50% 50% no-repeat;
+      background-size: cover;
+      position: inherit;
+      transform: translate(0, 100%);
+      bottom: 0;
+      left: 0;
+      z-index: 3;
+    }
+  }
 `;
 
 const OfferContainer = styled(Container)`
-  && {
-    width: 100vw !important;
-    @media (min-width: 729px) {
-      padding-bottom: 2%;
-      padding-top: 2%;
-    }
-    @media (max-width: 728px) {
-      padding-left: 10%;
-      padding-right: 10%;
-      padding-bottom: 5%;
-    }
-  }
+  padding-top: 1%;
 `;
 
 const OfferBox = styled(Box)`
@@ -87,63 +108,50 @@ const OfferBox = styled(Box)`
   margin-left: auto;
   margin-right: auto;
   justify-content: center;
-  @media (min-width: 1025px) {
+  display: flex;
+  align-items: center;
+  @media (min-width: 1024px) {
     display: flex;
   }
-  @media (max-width: 1024px) {
-    display: grid;
-  }
-  display: flex;
   flex-wrap: wrap;
+`;
+
+const TitleWithImage = styled(Title)`
+  background: url(${PencilBg}) no-repeat;
+  background-position: center;
 `;
 
 const Tag = styled.a`
   display: block;
   text-decoration: none;
-  @media (min-width: 729px) {
+  padding: 0%;
+  width: 280px;
+  max-width: 90%;
+  margin: 2vh 0%;
+  @media (min-width: 728px) {
     width: 440px;
     margin: 0 1vw;
     padding: 2%;
   }
-  @media (max-width: 728px) {
-    width: 300px;
-    margin: 2vh 0%;
-  }
 `;
-
-// const LinkA = styled(Link)`
-//   display: block;
-//   text-decoration: none;
-//   @media (min-width: 729px) {
-//     width: 440px;
-//     margin: 0 1vw;
-//     padding: 2%;
-//   }
-//   @media (max-width: 728px) {
-//     width: 300px;
-//     margin: 2vh 0%;
-//   }
-// `;
 
 const OfferImage = styled.img`
   && {
-    @media (min-width: 729px) {
+    width: 65vw;
+    height: 20vh;
+    @media (min-width: 500px) {
+      width: 300px;
+      height: 180px;
+    }
+    @media (min-width: 728px) {
       width: 440px;
       height: 240px;
       margin-left: -30%;
     }
-    @media (min-width: 501px) and (max-width: 728px) {
-      width: 300px;
-      height: 180px;
-    }
-    @media (max-width: 500px) {
-      width: 60vw;
-      height: 20vh;
-    }
     &:hover {
       transition: 0.4s;
       margin-left: -10%;
-      z-index: 6 !important;
+      z-index: 6;
     }
   }
 `;
@@ -151,18 +159,17 @@ const OfferImage = styled.img`
 const GreenContent = styled.div`
   && {
     background: url(${BagSvg}) 50% 50% no-repeat;
-    @media (min-width: 729px) {
+    height: 20vh;
+    width: 50px;
+    @media (min-width: 500px) {
+      width: 60px;
+      height: 180px;
+    }
+    @media (min-width: 728px) {
       width: 66px;
       height: 240px;
     }
-    @media (max-width: 728px) {
-      width: 45px;
-      height: 180px;
-    }
-    @media (max-width: 500px) {
-      height: 20vh;
-    }
-    z-index: 3 !important;
+    z-index: 3;
     position: relative;
     background-color: #afbf00;
   }
@@ -171,5 +178,6 @@ const GreenContent = styled.div`
 const OfferProductDiv = styled.div`
   && {
     display: -webkit-box;
+    justify-content: center;
   }
 `;

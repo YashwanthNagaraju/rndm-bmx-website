@@ -7,18 +7,17 @@ import {
   GeneralText,
   greenColor,
   HeaderText,
-  OverlayBefore,
   StyleDiv,
   successColor,
   Title,
   whiteColor,
 } from "../../../styles/commonStyles";
 import { navContactID } from "../handlers/pageRoutes";
-import bgImage from "../../../assets/images/home/contact/bg.jpg";
+import bgImage from "../../../assets/images/home/contact_background.png";
 import { Alert, Box, Button, Container, Snackbar, Stack } from "@mui/material";
 import { apiKey } from "../handlers/emailKey";
 import emailjs from "@emailjs/browser";
-// import ReCAPTCHA from "react-google-recaptcha";
+import overlayBefore from "../../../assets/images/home/before.png";
 
 export const errorText = "error";
 export const successText = "success";
@@ -58,13 +57,13 @@ export const ContactContent = () => {
     if (!emailID) {
       return handleMessage("Enter your email ID to submit.", errorText);
     }
-    if (!message) {
-      return handleMessage("Enter a message to submit.", errorText);
-    }
     if (emailID) {
       if (!emailID.match(/^[^@\s]+@[^@\s]+\.[^@\s]+$/)) {
         return handleMessage("Invalid email id.", errorText);
       }
+    }
+    if (!message) {
+      return handleMessage("Enter a message to submit.", errorText);
     }
     try {
       var templateParams = {
@@ -109,66 +108,68 @@ export const ContactContent = () => {
 
   // const contactText = "on the right";
   // const contactTextM = "on the bottom";
-  const isMobile = window.matchMedia('only screen and (max-width: 900px)').matches;
-  const contactText = isMobile? "bottom":"right"
+  const isMobile = window.matchMedia(
+    "only screen and (max-width: 900px)"
+  ).matches;
+  const contactText = isMobile ? "bottom" : "right";
   return (
-    <ContactElement name={navContactID}>
-      <OverlayBefore />
+    <ContactElement name={navContactID} id="home-contact-section">
       <Box style={{ textAlign: "center" }}>
-        <ContactTitle as="h2" isBlack={true}>
-          {" "}
+        <Title as="h2" isBlack={true}>
           Contact Us
-        </ContactTitle>
+        </Title>
       </Box>
-      <ContactContainer id="homeContact">
-        <ContactStack id="contactStack" direction="row" spacing={2}>
-          <ContactBox id="contactBox">
+      <ContactContainer id="contact-container">
+        <ContactStack direction="row" spacing={1}>
+          <ContactBox id="contact-text-box">
             <ContactHeading color={blackColor} as="h2">
               Reach out to us
             </ContactHeading>
             <ContactText variant="body1" textAlign={"left"} color={blackColor}>
               For questions, queries and anything in between, just fill out the
-              form (on the {contactText}) and we will get back to you really soon.
+              form (on the {contactText}) and we will get back to you really
+              soon.
             </ContactText>
           </ContactBox>
-          <ContactInfoBox component="form" id="contactInfoBox">
-            <FormStack direction="row" spacing={4}>
-              <HiddenLabel htmlFor="nameField">Name:* </HiddenLabel>
+          <ContactInfoBox component="form" id="contact-form-box">
+            <Stack direction="row" spacing={4}>
+              <HiddenLabel htmlFor="name-field">Name:* </HiddenLabel>
               <InfoField
                 hasMargin={true}
                 maxLength={40}
                 isAdjacent={true}
-                id="nameField"
+                id="name-field"
                 type="text"
                 placeholder="Name"
-                style={{}}
                 onChange={(e) => setName(e.target.value)}
               />
-              <HiddenLabel htmlFor="emailIdField">Email ID: </HiddenLabel>
+              <HiddenLabel htmlFor="email-id-field">Email ID: </HiddenLabel>
               <InfoField
-                id="emailIdField"
+                id="email-id-field"
+                required
                 isAdjacent={true}
-                type="text"
+                type="email"
                 maxLength={40}
                 placeholder="Email Id"
                 onChange={(e) => setEmailID(e.target.value)}
               />
-            </FormStack>
+            </Stack>
             <StyleDiv />
-            <HiddenLabel htmlFor="subjectIdField">Subject:</HiddenLabel>
+            <HiddenLabel htmlFor="subject-id-field">Subject:</HiddenLabel>
             <InfoField
-              id="subjectIdField"
+              id="subject-id-field"
               type="text"
               maxLength={60}
               placeholder="Subject"
               onChange={(e) => setSubject(e.target.value)}
             />
             <StyleDiv />
-            <HiddenLabel htmlFor="messageField">Message: </HiddenLabel>
+            <HiddenLabel htmlFor="message-field">Message: </HiddenLabel>
             <TextField
-              id="messageField"
+              id="message-field"
               placeholder="Message"
               type="text"
+              required
               maxLength={1000}
               style={{
                 minHeight: "20%",
@@ -178,7 +179,7 @@ export const ContactContent = () => {
             />
             <StyleDiv />
             <MessageButton
-              id="profileButton"
+              id="profile-button"
               type="submit"
               onClick={(e) => handleSubmit(e)}
               variant="contained"
@@ -186,19 +187,18 @@ export const ContactContent = () => {
             >
               SEND IT!
             </MessageButton>
-            {/* <ReCAPTCHA sitekey={process.env.REACT_APP_SITE_KEY} /> */}
           </ContactInfoBox>
         </ContactStack>
         {msg !== "" && alert && (
           <InfoBar
-            id="infoBar"
+            id="info-bar"
             anchorOrigin={{ vertical, horizontal }}
             open={msg !== ""}
             autoHideDuration={2}
             key={vertical + horizontal}
           >
             <Alert
-              id="alertInfoBar"
+              id="alert-bar"
               style={{
                 backgroundColor: msg === "error" ? errorColor : successColor,
                 color: whiteColor,
@@ -218,48 +218,66 @@ export const ContactContent = () => {
 
 const ContactElement = styled(Element)`
   &&& {
-    max-width: 100vw;
     min-height: 60vh;
+    min-width: 100vw;
     background: url(${bgImage});
     background-size: cover !important;
     background-attachment: fixed;
-    @media (min-width: 729px) {
-      background-attachment: fixed;
-    }
-    @media (max-width: 728px) {
+    padding: constant(safe-area-inset-top) constant(safe-area-inset-right)
+      constant(safe-area-inset-bottom) constant(safe-area-inset-left);
+    padding: env(safe-area-inset-top) env(safe-area-inset-right)
+      env(safe-area-inset-bottom) env(safe-area-inset-left);
+    @media (min-width: 0px) {
       background-attachment: inherit;
     }
+    @media (min-width: 728px) {
+      background-attachment: fixed;
+    }
     background-size: auto;
+    ::before {
+      content: "";
+      display: block;
+      width: 100%;
+      min-height: 100px;
+      position: inherit;
+      transform: translate(0, -99px);
+      top: 0;
+      left: 0;
+      z-index: 3;
+      background: url(${overlayBefore});
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+    }
   }
 `;
 
 const ContactContainer = styled(Container)`
   && {
-    @media (max-width: 768px) {
+    @media (min-width: 0px) {
       padding-bottom: 15vh;
       max-width: 90% !important;
       display: flex;
+      justify-content: center;
     }
-    @media (min-width: 768px) and (max-width: 1200px) {
+    @media (min-width: 768px) {
       max-width: 85% !important;
-      padding: 15vh 0% 15vh 0%;
       display: inline-flex;
+      justify-content: center;
     }
     @media (min-width: 1200px) {
       max-width: 80% !important;
       padding: 10vh 0% 15vh 0%;
       display: inline-flex;
+      justify-content: center;
     }
   }
 `;
 
 const ContactStack = styled(Stack)`
   && {
-    width: 100%;
-    @media (max-width: 900px) {
-      display: block;
-    }
+    display: block;
     @media (min-width: 900px) {
+      justify-content: center;
       display: flex;
     }
   }
@@ -267,17 +285,14 @@ const ContactStack = styled(Stack)`
 
 const ContactBox = styled(Box)`
   align-content: baseline;
-  @media (max-width: 900px) {
-    height:50vh
-    width: 80%;
-  }
-  @media (min-width: 900px) and (max-width:1400px) {
-    padding-right:5%;
-    width: 60%;
+  max-width: 80%;
+  @media (min-width: 900px) {
+    max-width: 40%;
+    padding-right: 5%;
   }
   @media (min-width: 1400px) {
-    padding-right:5%;
-    width: 50%;
+    padding-right: 5%;
+    max-width: 50%;
   }
 `;
 
@@ -289,24 +304,21 @@ const ContactInfoBox = styled(Box)`
     padding-top:10%;
     margin:0%;
     height:50vh
-    width: 80%;
+    max-width: 80%;
   }
   @media (min-width: 900px) and (max-width:1400px) {
-    padding-top:0%;
     padding-left:5%;
     margin-left:0%;
-    width: 60%;
+    max-width: 60%;
   }
   @media (min-width: 1400px) {
     padding-top:0%;
     padding-left:5%;
     margin-left:0%;
-    width: 60%;
+    min-width:50%;
+    max-width: 70%;
   }
 }
-`;
-const ContactTitle = styled(Title)`
-  padding-top: 4%;
 `;
 
 const ContactHeading = styled(HeaderText)`
@@ -410,8 +422,6 @@ const InfoField = styled.input`
     }
   }
 `;
-
-const FormStack = styled(Stack)``;
 
 const InfoBar = styled(Snackbar)`
   && {

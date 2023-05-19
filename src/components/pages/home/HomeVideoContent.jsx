@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Element } from "react-scroll";
 import {
   bgWhiteColor,
@@ -31,10 +31,25 @@ export const HomeVideoContent = () => {
     }
   }
 
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        refVideo.current.muted = true;
+      } else {
+        refVideo.current.muted = isMuted;
+      }
+    };
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, [isMuted]);
+
   return (
-    <Element name={navHomeID} z-index={1}>
-      <VideoContainer id="homeVideo">
+    <HomeVideoElement name={navHomeID} id="home-video-section">
+      <VideoContainer>
         <HomeVideo
+          id="home-video"
           src={videoContent}
           ref={refVideo}
           muted={isMuted}
@@ -42,9 +57,8 @@ export const HomeVideoContent = () => {
           playsInline
           preload="metadata"
           loop
-          z-index={-1}
         ></HomeVideo>
-        <OverlayBox id="homeVideoText">
+        <OverlayBox id="home-video-content">
           <VideoText variant="h1">{homeVideoText} </VideoText>
           {!isMuted && (
             <SoundIcon
@@ -62,20 +76,31 @@ export const HomeVideoContent = () => {
           )}
         </OverlayBox>
       </VideoContainer>
-    </Element>
+    </HomeVideoElement>
   );
 };
 
+const HomeVideoElement = styled(Element)`
+  && {
+    display: flex;
+    align-items: center;
+    z-index: 1;
+    padding: constant(safe-area-inset-top) constant(safe-area-inset-right)
+      constant(safe-area-inset-bottom) constant(safe-area-inset-left);
+    padding: env(safe-area-inset-top) env(safe-area-inset-right)
+      env(safe-area-inset-bottom) env(safe-area-inset-left);
+  }
+`;
+
 const HomeVideo = styled.video`
   object-fit: cover;
-  width:100%;
-}
+  width: 100%;
 `;
 
 const VideoContainer = styled.div`
-  width: 100%;
   height: 110vh;
   display: flex;
+  min-width: 100vw;
 `;
 
 const OverlayBox = styled(Box)`
@@ -86,7 +111,6 @@ const OverlayBox = styled(Box)`
   justify-content: center;
   margin: auto;
   width: 100vw;
-  height: 100vh;
 `;
 
 const VideoText = styled(HeaderText)`
@@ -98,13 +122,13 @@ const VideoText = styled(HeaderText)`
     height: 90vh;
     @media (min-width: 1024px) {
       max-width: 720px;
-    }
-    @media (min-width: 1024px) {
       font-size: 80px !important;
     }
     align-items: center;
     justify-content: center;
     display: flex;
+    height: 100vh;
+    padding: 0vh 10px;
   }
 `;
 
