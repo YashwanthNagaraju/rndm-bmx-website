@@ -16,3 +16,25 @@
 //     </div>
 //   );
 // };
+import { Container } from "@mui/material";
+import React from "react";
+import { NavigationBar } from "../../common/NavigationBar";
+import styled from "styled-components";
+import { Footer } from "../../common/Footer";
+
+export const ShopPage = () => {
+  return (
+    <>
+      <NavigationBar isHomePage={false} arrayToHandle={[]} />
+      <ShopContainer />
+      <Footer />
+    </>
+  );
+};
+
+const ShopContainer = styled(Container)`
+  display: flex;
+  align-items: center;
+  min-width: 100vw;
+  min-height: 60vh;
+`;

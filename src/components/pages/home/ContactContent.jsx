@@ -223,10 +223,6 @@ const ContactElement = styled(Element)`
     background: url(${bgImage});
     background-size: cover !important;
     background-attachment: fixed;
-    padding: constant(safe-area-inset-top) constant(safe-area-inset-right)
-      constant(safe-area-inset-bottom) constant(safe-area-inset-left);
-    padding: env(safe-area-inset-top) env(safe-area-inset-right)
-      env(safe-area-inset-bottom) env(safe-area-inset-left);
     @media (min-width: 0px) {
       background-attachment: inherit;
     }

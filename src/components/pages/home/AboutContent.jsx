@@ -40,7 +40,12 @@ export const AboutContent = () => {
               <br />
               <GeneralText color={blackColor} textAlign={"left"}>
                 Find out more about our{" "}
-                <GeneralLink href={blogLink} rel="noopener" target="_blank">
+                <GeneralLink
+                  href={blogLink}
+                  rel="noopener"
+                  target="_blank"
+                  aria-label="Read more about our Early Beginnings and Development as a BMX Brand"
+                >
                   Early Beginnings and Development as a BMX Brand.
                 </GeneralLink>
               </GeneralText>
@@ -52,12 +57,7 @@ export const AboutContent = () => {
   );
 };
 
-const AboutElement = styled(Element)`
-  padding: constant(safe-area-inset-top) constant(safe-area-inset-right)
-    constant(safe-area-inset-bottom) constant(safe-area-inset-left);
-  padding: env(safe-area-inset-top) env(safe-area-inset-right)
-    env(safe-area-inset-bottom) env(safe-area-inset-left);
-`;
+const AboutElement = styled(Element)``;
 
 const AboutContainer = styled(Container)`
   && {

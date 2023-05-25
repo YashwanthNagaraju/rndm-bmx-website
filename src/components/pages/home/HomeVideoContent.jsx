@@ -47,7 +47,7 @@ export const HomeVideoContent = () => {
 
   return (
     <HomeVideoElement name={navHomeID} id="home-video-section">
-      <VideoContainer>
+      <VideoContainer tabIndex="0">
         <HomeVideo
           id="home-video"
           src={videoContent}
@@ -57,6 +57,7 @@ export const HomeVideoContent = () => {
           playsInline
           preload="metadata"
           loop
+          title="Home Video"
         ></HomeVideo>
         <OverlayBox id="home-video-content">
           <VideoText variant="h1">{homeVideoText} </VideoText>
@@ -65,6 +66,7 @@ export const HomeVideoContent = () => {
               size={laptopSize}
               onClick={playMusic}
               color={bgWhiteColor}
+              aria-label="Sound On"
             />
           )}
           {isMuted && (
@@ -72,6 +74,7 @@ export const HomeVideoContent = () => {
               size={laptopSize}
               onClick={playMusic}
               color={bgWhiteColor}
+              aria-label="Mute"
             />
           )}
         </OverlayBox>
@@ -85,10 +88,6 @@ const HomeVideoElement = styled(Element)`
     display: flex;
     align-items: center;
     z-index: 1;
-    padding: constant(safe-area-inset-top) constant(safe-area-inset-right)
-      constant(safe-area-inset-bottom) constant(safe-area-inset-left);
-    padding: env(safe-area-inset-top) env(safe-area-inset-right)
-      env(safe-area-inset-bottom) env(safe-area-inset-left);
   }
 `;
 

@@ -1,19 +1,26 @@
-// import React, {useEffect } from "react";
-// import { Footer } from "../../common/Footer";
-// import { NavigationBar } from "../../common/NavigationBar";
-// import { Product } from "./Product";
+import React, { useEffect } from "react";
+import { Footer } from "../../common/Footer";
+import { NavigationBar } from "../../common/NavigationBar";
+import { Container } from "@mui/material";
+import styled from "styled-components";
 
-// export const ProductPage = () => {
+export const ProductPage = () => {
+  useEffect(() => {
+    console.log("test");
+    window.scrollTo(0, 0);
+  }, []);
+  return (
+    <>
+      <NavigationBar isHomePage={false} arrayToHandle={[]} />
+      <ProductContainer />
+      <Footer />
+    </>
+  );
+};
 
-//   useEffect(() => {
-//     console.log("test")
-//     window.scrollTo(0, 0)
-//   }, [])
-//   return (
-//     <div>
-//       <NavigationBar isHomePage={false}/>
-//       <Product/>
-//       <Footer />
-//     </div>
-//   );
-// };
+const ProductContainer = styled(Container)`
+  display: flex;
+  align-items: center;
+  min-width: 100vw;
+  min-height: 60vh;
+`;

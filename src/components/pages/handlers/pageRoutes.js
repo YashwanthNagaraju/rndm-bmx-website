@@ -53,3 +53,13 @@ export const footerLinks = [
 //   "homeContact",
 //   "footerContent",
 // ];
+
+export const homePageElementArray = [
+  "home-video-section",
+  "home-product-section",
+  "home-about-section",
+  "home-offer-section",
+  "home-blog-section",
+  "home-contact-section",
+  "footer-content",
+];

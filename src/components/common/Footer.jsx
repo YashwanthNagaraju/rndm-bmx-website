@@ -78,10 +78,17 @@ export const Footer = () => {
   const handleClose = useCallback(() => {
     setOpen(false);
   });
+
   return (
     <FooterContainer id="footer-content" as="footer">
       <FooterMainGrid container spacing={{ xs: 2, md: 2 }}>
-        <Grid item xs={12} md={4} lg={5}>
+        <Grid
+          item
+          xs={12}
+          md={4}
+          lg={5}
+          paddingTop={{ xs: "15px", md: "0px!important" }}
+        >
           <Box>
             <img
               width={
@@ -117,7 +124,13 @@ export const Footer = () => {
             </FooterText>
           </Box>
         </Grid>
-        <Grid item xs={12} md={4} lg={3.5}>
+        <Grid
+          item
+          xs={12}
+          md={4}
+          lg={3.5}
+          paddingTop={{ xs: "15px", md: "0px!important" }}
+        >
           <LinksBox padding={{ sx: "0% 20%", md: "0% 5%" }}>
             <FooterHeader as="h2" textAlign={"start"}>
               Quick links
@@ -149,7 +162,13 @@ export const Footer = () => {
             ))}
           </LinksBox>
         </Grid>
-        <Grid item xs={12} md={4} lg={3.5}>
+        <Grid
+          item
+          xs={12}
+          md={4}
+          lg={3.5}
+          paddingTop={{ xs: "15px", md: "0px!important" }}
+        >
           <FooterHeader as="h2" textAlign={"center"}>
             RNDM-BMX Info.
           </FooterHeader>
@@ -218,7 +237,7 @@ const FooterText = styled(GeneralText)`
 const FooterContainer = styled(Container)`
   min-width: 100vw;
   background: #0e0e11;
-  min-height: 40vh;
+  min-height: 35vh;
 `;
 
 const FooterMainGrid = styled(Grid)`

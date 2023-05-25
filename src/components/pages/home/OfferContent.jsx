@@ -31,6 +31,7 @@ export const OfferContent = () => {
               href={offer.link}
               target="_blank"
               rel="noopener"
+              aria-label={offer.title}
             >
               <OfferProductDiv>
                 <GreenContent />
@@ -58,10 +59,6 @@ const OfferElement = styled(Element)`
     min-height: 40vh;
     background-color: ${bgWhiteColor};
     min-width: 100vw;
-    padding: constant(safe-area-inset-top) constant(safe-area-inset-right)
-      constant(safe-area-inset-bottom) constant(safe-area-inset-left);
-    padding: env(safe-area-inset-top) env(safe-area-inset-right)
-      env(safe-area-inset-bottom) env(safe-area-inset-left);
     ::before {
       margin-bottom: -8%;
       @media (min-width: 728px) {

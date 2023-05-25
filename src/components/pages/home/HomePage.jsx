@@ -9,11 +9,12 @@ import { OfferContent } from "./OfferContent";
 import { ProductContent } from "./ProductContent";
 import { Footer } from "../../common/Footer";
 import { BlogContent } from "./BlogContent";
+import { homePageElementArray } from "../handlers/pageRoutes";
 
 export const HomePage = () => {
   return (
     <div>
-      <NavigationBar isHomePage={true} />
+      <NavigationBar isHomePage={true} arrayToHandle={homePageElementArray} />
       <MainContainer id="main-content">
         <HomeVideoContent />
         <ProductContent />
@@ -35,12 +36,5 @@ const MainContainer = styled(Container)`
     flex-direction: column;
     margin: 0%;
     padding: 0%;
-    ${() =>
-      css`
-        padding: constant(safe-area-inset-top) constant(safe-area-inset-right)
-          constant(safe-area-inset-bottom) constant(safe-area-inset-left);
-        padding: env(safe-area-inset-top) env(safe-area-inset-right)
-          env(safe-area-inset-bottom) env(safe-area-inset-left);
-      `}
   }
 `;

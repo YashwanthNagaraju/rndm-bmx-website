@@ -21,20 +21,12 @@ import { navLinks } from "../pages/handlers/pageRoutes";
 import { HomeLogo, HomeLogoM } from "./HomeLogo";
 import { Link as RouterLink } from "react-router-dom";
 
-export const NavigationBar = ({ isHomePage }) => {
+export const NavigationBar = ({ isHomePage, arrayToHandle }) => {
   const { isOpen, setOpen } = useContext(ThemeContext);
   const [scrollPosition, setScrollPosition] = useState();
   const isMobile = !useMediaQuery("(min-width:900px)");
 
-  const elementArray = [
-    "home-video-section",
-    "home-product-section",
-    "home-about-section",
-    "home-offer-section",
-    "home-blog-section",
-    "home-contact-section",
-    "footer-content",
-  ];
+  const elementArray = arrayToHandle;
 
   const handleBlur = useCallback((elementID, style) => {
     const element = document.getElementById(elementID);
@@ -119,7 +111,7 @@ export const NavigationBar = ({ isHomePage }) => {
                 id="logo"
                 href="/"
               >
-                <LogoImage width={130} height={90} src={RNDM} alt="RNDM-BMX" />
+                <LogoImage width={157} height={100} src={RNDM} alt="RNDM-BMX" />
               </NoStyleRouterLink>
             )}
             <NavGrid
@@ -135,8 +127,8 @@ export const NavigationBar = ({ isHomePage }) => {
                 {!isHomePage && (
                   <NoStyleRouterLinkM to="/" id="mobile-logo">
                     <LogoImage
-                      width={120}
-                      height={84}
+                      width={125}
+                      height={80}
                       src={RNDM}
                       alt="RNDM-BMX"
                     />
@@ -233,6 +225,9 @@ const StyledAppBar = styled(AppBar)`
     color: ${whiteColor};
     background: ${blackNavColor};
     backdrop-filter: blur(2px);
+    padding-top: env(safe-area-inset-top);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
   }
 `;
 
@@ -335,6 +330,7 @@ const HomeLink = styled(Link)`
 const NoStyleRouterLinkM = styled(RouterLink)`
   text-decoration: none;
   display: flex;
+  padding: 1.5vh;
   justify-content: center;
   @media (min-width: 768px) {
     display: none !important;
